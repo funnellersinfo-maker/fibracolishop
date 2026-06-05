@@ -127,6 +127,31 @@ function GiftReminder() {
   )
 }
 
+/* ─── PAYMENT STRIP ─── */
+
+function PaymentStrip() {
+  return (
+    <div className="bg-gradient-to-r from-emerald-700 to-emerald-600 text-center py-3 px-4 mt-3 rounded-xl">
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        <span className="flex items-center gap-1.5 text-white text-xs font-bold">
+          <Truck className="w-4 h-4 text-amber-300" />
+          Pago contra entrega
+        </span>
+        <span className="text-emerald-300/50">|</span>
+        <span className="flex items-center gap-1.5 text-amber-300 text-xs font-extrabold">
+          <Zap className="w-4 h-4" />
+          5% OFF en pago anticipado
+        </span>
+        <span className="text-emerald-300/50">|</span>
+        <span className="flex items-center gap-1.5 text-white text-xs font-bold">
+          <Clock className="w-4 h-4 text-amber-300" />
+          Prioridad en despacho
+        </span>
+      </div>
+    </div>
+  )
+}
+
 /* ─── SECTION 1: HERO ─── */
 
 const HERO_IMAGES = [
@@ -267,8 +292,9 @@ function HeroSection() {
         >
           ¡QUIERO MI COLIPLUS AHORA! 🌿
         </a>
+        <PaymentStrip />
         <p className="text-center text-xs text-emerald-200 mt-2">
-          Solo pagas cuando lo recibes · Envío a toda Colombia · <span className="text-amber-300 font-semibold">🎁 Loción GRATIS</span>
+          <span className="text-amber-300 font-semibold">🎁 Loción GRATIS</span> con tu pedido
         </p>
       </div>
     </section>
@@ -588,12 +614,10 @@ function PricingSection() {
             >
               🛒 ¡ORDENAR AHORA! Pago contra entrega
             </a>
-            <div className="flex items-center justify-center gap-3 mt-3">
-              <img src="/images/pagos-seguros.png" alt="Pagos seguros" className="h-8 object-contain" />
-            </div>
+            <PaymentStrip />
             <p className="text-xs text-gray-500 mt-2">
               <Lock className="w-3 h-3 inline mr-1" />
-              Compra segura · Solo pagas al recibir · <span className="text-amber-600 font-semibold">🎁 Loción GRATIS incluida</span>
+              Compra segura · <span className="text-amber-600 font-semibold">🎁 Loción GRATIS incluida</span>
             </p>
           </div>
         </RevealOnScroll>
@@ -638,6 +662,7 @@ function DidYouKnowSection() {
             >
               Quiero limpiar mi colon YA →
             </a>
+            <PaymentStrip />
           </div>
         </RevealOnScroll>
       </div>
@@ -694,6 +719,7 @@ function BenefitsChecklist() {
             >
               ¡Quiero todos estos beneficios! →
             </a>
+            <PaymentStrip />
           </div>
         </RevealOnScroll>
       </div>
@@ -775,6 +801,7 @@ function WhyEffectiveSection() {
             >
               Experimenta la diferencia →
             </a>
+            <PaymentStrip />
           </div>
         </RevealOnScroll>
       </div>
@@ -842,6 +869,7 @@ function BestOptionSection() {
             >
               Elige la mejor opción →
             </a>
+            <PaymentStrip />
           </div>
         </RevealOnScroll>
       </div>
@@ -1048,7 +1076,7 @@ function GiftSection() {
             >
               🎁 ¡QUIERO MI OBSEQUIO GRATIS!
             </a>
-            <p className="text-xs text-amber-700 mt-2">Solo pagas cuando recibes · Envío a toda Colombia</p>
+            <PaymentStrip />
           </div>
         </RevealOnScroll>
       </div>
@@ -1075,9 +1103,9 @@ function FinalCTA() {
           >
             ¡ORDENAR COLIPLUS AHORA! 🌿
           </a>
-          <div className="mt-3 flex items-center justify-center gap-4 text-emerald-200 text-xs">
+          <PaymentStrip />
+          <div className="mt-2 flex items-center justify-center gap-4 text-emerald-200 text-xs">
             <span className="flex items-center gap-1"><Truck className="w-3.5 h-3.5" /> Envío nacional</span>
-            <span className="flex items-center gap-1"><Shield className="w-3.5 h-3.5" /> Pago contra entrega</span>
             <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> INVIMA</span>
           </div>
         </RevealOnScroll>
@@ -1112,7 +1140,7 @@ function StickyCTA() {
           <div className="max-w-lg mx-auto flex items-center gap-3">
             <div className="flex-1">
               <p className="text-xs font-bold text-gray-900">ColiPlus + Loción GRATIS</p>
-              <p className="text-[10px] text-gray-500">Pago contra entrega · Envío nacional</p>
+              <p className="text-[10px] text-gray-500">Pago contra entrega · <span className="text-amber-600 font-bold">5% OFF anticipado</span></p>
             </div>
             <a
               href="#oferta"
