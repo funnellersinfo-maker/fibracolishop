@@ -129,7 +129,36 @@ function GiftReminder() {
 
 /* ─── SECTION 1: HERO ─── */
 
+const HERO_IMAGES = [
+  { src: '/images/coliplus-hero.jpg', alt: 'ColiPlus - Fibra Prebiótica Natural para Bienestar Digestivo' },
+  { src: '/images/product-secondary.jpg', alt: 'ColiPlus - Vista del producto y sus beneficios' },
+]
+
 function HeroSection() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX
+  }
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX
+  }
+  const onTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current
+    if (Math.abs(distance) > minSwipeDistance) {
+      if (distance > 0) {
+        // Swiped left → next
+        setActiveSlide((prev) => (prev + 1) % HERO_IMAGES.length)
+      } else {
+        // Swiped right → prev
+        setActiveSlide((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)
+      }
+    }
+  }
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-900">
       {/* Decorative elements */}
@@ -147,15 +176,44 @@ function HeroSection() {
           </span>
         </div>
 
-        {/* Product image */}
-        <div className="relative flex justify-center mb-5">
-          <div className="relative w-72 h-72 sm:w-80 sm:h-80">
-            <img
-              src="/images/coliplus-hero.jpg"
-              alt="ColiPlus - Fibra Prebiótica Natural para Bienestar Digestivo"
-              className="w-full h-full object-contain product-glow float-animation"
-            />
+        {/* Product image carousel */}
+        <div
+          className="relative flex justify-center mb-3 select-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="relative w-72 h-72 sm:w-80 sm:h-80 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeSlide}
+                src={HERO_IMAGES[activeSlide].src}
+                alt={HERO_IMAGES[activeSlide].alt}
+                className="w-full h-full object-contain product-glow float-animation"
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                draggable={false}
+              />
+            </AnimatePresence>
           </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2.5 mb-5">
+          {HERO_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveSlide(i)}
+              className={`transition-all duration-300 rounded-full ${
+                i === activeSlide
+                  ? 'w-7 h-3 bg-amber-400 shadow-md shadow-amber-400/40'
+                  : 'w-3 h-3 bg-white/30 hover:bg-white/50'
+              }`}
+              aria-label={`Ver imagen ${i + 1}`}
+            />
+          ))}
         </div>
 
         {/* Headline */}
