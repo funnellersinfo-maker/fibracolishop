@@ -6,66 +6,100 @@ import {
   Star, Shield, Truck, Clock, CheckCircle2, ChevronDown, ChevronUp,
   MessageCircle, Heart, Leaf, Droplets, Zap, RefreshCw, Package,
   Phone, Lock, Gift, Award, Users, ThumbsUp, ArrowRight, X,
-  AlertCircle, Info, Sparkles, Timer, ShieldCheck, Ban
+  AlertCircle, Info, Sparkles, Timer, ShieldCheck, Ban, CircleDot,
+  Beaker, FlaskConical, Droplet, Sun, Apple, Flower2, LeafyGreen, Grape,
+  BadgeCheck, CircleCheck, HandMetal, Scale, Eye, FlameKindling, Pill
 } from 'lucide-react'
 
 /* ─── DATA ──────────────────────────────────────────────────────── */
 
 const TESTIMONIALS = [
-  { name: 'María Fernanda', city: 'Bogotá', initials: 'MF', color: '#059669', text: 'Llevaba 3 años sufriendo de estreñimiento crónico. Probé de todo y nada me funcionaba. Desde que tomé Fibra Coli, voy al baño todos los días sin esfuerzo. ¡No puedo creer el cambio!', objection: 'Escepticismo' },
-  { name: 'Claudia Elena', city: 'Medellín', initials: 'CE', color: '#d97706', text: 'Mi abdomen se inflamaba tanto que parecía embarazada de 5 meses. Tenía pena hasta salir de la casa. Después de 2 semanas con Fibra Coli, mi barriga se desinflamó notablemente. Me siento liviana otra vez.', objection: 'Funciona' },
-  { name: 'Sandra Milena', city: 'Cali', initials: 'SM', color: '#7c3aed', text: 'Los gases me daban pena en las reuniones. Era un suplicio. Ahora mi digestión es súper tranquila. Hasta mi esposo nota la diferencia porque ya no me quejo.', objection: 'Vergüenza' },
-  { name: 'Yolanda Pérez', city: 'Barranquilla', initials: 'YP', color: '#dc2626', text: 'Tenía miedo de comprar por internet, pero el pago contra entrega me dio confianza. Cuando vi el paquete, supe que era real. Llevo 1 mes y mi digestión cambió por completo.', objection: 'Desconfianza online' },
-  { name: 'Ana Beatriz', city: 'Bucaramanga', initials: 'AB', color: '#0891b2', text: 'Soy enfermera y paso turnos largos sin ir al baño. Eso me arruinó el tránsito intestinal. Fibra Coli me ayudó a regularizarme de forma natural, sin laxantes agresivos.', objection: 'Estilo de vida ocupado' },
-  { name: 'Patricia Gómez', city: 'Pereira', initials: 'PG', color: '#059669', text: 'Después de la menopausia, mi digestión se volvió un desastre. Pesadez, gases, estreñimiento... Mi ginecóloga me recomendó fibra y Fibra Coli fue la mejor opción. Me siento 10 años más joven.', objection: 'Cambios hormonales' },
-  { name: 'Lucía Restrepo', city: 'Manizales', initials: 'LR', color: '#d97706', text: 'Pensé que era normal sentirse pesada después de comer. NO LO ES. Desde Fibra Coli, como tranquila y termino el día sin esa molestia horrible en el estómago. Debería haberlo tomado antes.', objection: 'Normalizar el dolor' },
-  { name: 'Rosa Inés', city: 'Cartagena', initials: 'RI', color: '#7c3aed', text: 'Me gasté una fortuna en médicos y exámenes. Todo salía "normal". Pero yo me sentía mal. Fibra Coli fue lo único que realmente me dio alivio. A veces la solución es más sencilla de lo que creemos.', objection: 'Frustración médica' },
-  { name: 'Gloria Stella', city: 'Ibagué', initials: 'GS', color: '#dc2626', text: 'Probé otras fibras y me daban más gases o sabían horrible. Fibra Coli es diferente: sabor agradable, sin efectos secundarios y realmente funciona. Ya voy por mi tercer frasco.', objection: 'Malas experiencias previas' },
-  { name: 'Marta Cecilia', city: 'Villavicencio', initials: 'MC', color: '#0891b2', text: 'Vivo en el campo y pensé que no me llegaría. ¡Me llegó en 3 días! El envío fue rapidísimo. Ahora mi vecina también lo pidió. Ambas estamos felices con los resultados.', objection: 'Ubicación remota' },
-  { name: 'Diana Marcela', city: 'Pasto', initials: 'DM', color: '#059669', text: 'Tenía 5 días sin ir al baño. Era desesperante. Empecé Fibra Coli y al tercer día ya sentí alivio. No sé qué tiene este producto pero es un bendito. Lo recomiendo con los ojos cerrados.', objection: 'Estreñimiento severo' },
-  { name: 'Carmen Alicia', city: 'Montería', initials: 'CA', color: '#d97706', text: 'Mi mamá de 72 años no podía ir al baño bien. Le compré Fibra Coli y en una semana ya estaba regularizada. Ella dice que es el mejor regalo que le he dado. Gracias por este producto.', objection: 'Edad avanzada' },
-  { name: 'Natalia Andrea', city: 'Cúcuta', initials: 'NA', color: '#7c3aed', text: 'La pesadez después de comer me quitaba las ganas de hacer cualquier cosa. Era como si tuviera una piedra en el estómago. Con Fibra Coli, la comida ya no me pesa. Vuelvo a disfrutar comer.', objection: 'Pesadez post-comida' },
-  { name: 'Juliana Vargas', city: 'Armenia', initials: 'JV', color: '#dc2626', text: 'No quería depender de pastillas. Buscaba algo natural. Fibra Coli tiene ingredientes que reconozco y confío. Es fibra de verdad, no químicos raros. Eso me dio tranquilidad.', objection: 'Preferencia natural' },
-  { name: 'Beatriz Adriana', city: 'Popayán', initials: 'BA', color: '#0891b2', text: 'Compré solo 1 frasco para probar. Gran error. A las 2 semanas ya quería más y tuve que esperar el reenvío. Ahora compro de 3 en 3. No me quedo sin mi Fibra Coli ni un día.', objection: 'Comprar poco' },
-  { name: 'Ángela Rocío', city: 'Sincelejo', initials: 'AR', color: '#059669', text: 'Mi colon se saturó por años de mala alimentación. El médico me dijo que necesitaba fibra urgente. Encontré Fibra Coli y ha sido mi salvación. Ya no tengo esas crisis de dolor.', objection: 'Diagnóstico médico' },
-  { name: 'Silvia Lorena', city: 'Valledupar', initials: 'SL', color: '#d97706', text: 'Les mentiría si dijera que funcionó en 1 día. Me tomó como 5 días sentir el cambio. Pero una vez que empezó, fue progresivo y cada día mejor. Paciencia y constancia, vale la pena.', objection: 'Expectativas inmediatas' },
-  { name: 'Fabiola Torres', city: 'Neiva', initials: 'FT', color: '#7c3aed', text: 'El sabor es rico, no como otras fibras que saben a cartón. Lo tomo con jugo de naranja en la mañana y se siente como un ritual de cuidado personal. Me encanta empezar el día así.', objection: 'Sabor desagradable' },
-  { name: 'Leidy Johana', city: 'Tunja', initials: 'LJ', color: '#dc2626', text: 'Trabajo sentada todo el día y eso mató mi digestión. Desde que tomo Fibra Coli y camino 20 minutos, mi cuerpo funciona como reloj. La combinación es perfecta.', objection: 'Vida sedentaria' },
-  { name: 'Adriana Pardo', city: 'Florencia', initials: 'AP', color: '#0891b2', text: 'La atención por WhatsApp fue espectacular. Me resolvieron todas las dudas antes de comprar. Eso me dio mucha confianza. Y el producto cumplió todo lo que prometen. 100% recomendado.', objection: 'Dudas pre-compra' },
+  { name: 'Carolina M.', city: 'Barranquilla', text: 'Nunca creí que algo tan natural funcionara tan bien. Mi digestión es rápida y mi abdomen, plano. ¡Lo recomiendo totalmente!', tag: 'Cambió mi Vida' },
+  { name: 'Andrea L.', city: 'Bogotá', text: 'ColiPlus cambió mi vida: mi estómago está cómodo y sin inflamación. ¡Y sin ningún efecto secundario!', tag: 'Cambió mi Vida' },
+  { name: 'Natalia S.', city: 'Medellín', text: 'Después de probar muchos productos, ColiPlus venció mi estreñimiento en solo una semana. ¡Adiós pesadez y malestar!', tag: 'Superó mis Expectativas' },
+  { name: 'María José', city: 'Medellín', text: 'Llevaba años lidiando con el estreñimiento y nada parecía funcionar, hasta que probé este producto. Desde la primera semana noté cambios. Mi digestión es más rápida, la inflamación desapareció y me siento mucho más cómoda. ¡No lo cambio por nada!', tag: 'Cambió mi Vida' },
+  { name: 'Sandra P.', city: 'Montería', text: 'Honestamente, no esperaba tanto, pero superó mis expectativas. He notado una gran mejora en mi salud digestiva y ya no tengo esa sensación de pesadez después de las comidas.', tag: 'Superó mis Expectativas' },
+  { name: 'Luz Dary', city: 'Barranquilla', text: 'Increíble! Me siento mucho más ligera y con energía todos los días. Antes solía sufrir de hinchazón e incomodidad constante, pero ahora mi digestión es mucho más regular y sin molestias. 100% recomendado, si funciona!', tag: '100% Recomendado' },
+  { name: 'Claudia R.', city: 'Cali', text: 'Mi abdomen se inflamaba tanto que parecía embarazada. Tenía pena hasta salir de casa. Después de 2 semanas con ColiPlus, mi barriga se desinflamó notablemente. Me siento liviana otra vez.', tag: 'Cambió mi Vida' },
+  { name: 'Yolanda P.', city: 'Barranquilla', text: 'Tenía miedo de comprar por internet, pero el pago contra entrega me dio confianza. Cuando vi el paquete, supe que era real. Llevo 1 mes y mi digestión cambió por completo.', tag: 'Superó mis Expectativas' },
+  { name: 'Ana B.', city: 'Bucaramanga', text: 'Soy enfermera y paso turnos largos sin ir al baño. Eso me arruinó el tránsito intestinal. ColiPlus me ayudó a regularizarme de forma natural, sin laxantes agresivos.', tag: '100% Recomendado' },
+  { name: 'Patricia G.', city: 'Pereira', text: 'Después de la menopausia, mi digestión se volvió un desastre. Pesadez, gases, estreñimiento... ColiPlus fue la mejor opción. Me siento 10 años más joven.', tag: 'Cambió mi Vida' },
+  { name: 'Lucía R.', city: 'Manizales', text: 'Pensé que era normal sentirse pesada después de comer. NO LO ES. Desde ColiPlus, como tranquila y termino el día sin esa molestia horrible. Debería haberlo tomado antes.', tag: 'Superó mis Expectativas' },
+  { name: 'Rosa I.', city: 'Cartagena', text: 'Me gasté una fortuna en médicos y exámenes. Todo salía "normal". Pero yo me sentía mal. ColiPlus fue lo único que realmente me dio alivio.', tag: 'Cambió mi Vida' },
+  { name: 'Gloria S.', city: 'Ibagué', text: 'Probé otras fibras y me daban más gases o sabían horrible. ColiPlus es diferente: sabor agradable, sin efectos secundarios y realmente funciona. Ya voy por mi tercer frasco.', tag: '100% Recomendado' },
+  { name: 'Marta C.', city: 'Villavicencio', text: 'Vivo en el campo y pensé que no me llegaría. ¡Me llegó en 3 días! El envío fue rapidísimo. Ahora mi vecina también lo pidió.', tag: 'Superó mis Expectativas' },
+  { name: 'Diana M.', city: 'Pasto', text: 'Tenía 5 días sin ir al baño. Era desesperante. Empecé ColiPlus y al tercer día ya sentí alivio. No sé qué tiene este producto pero es un bendito. Lo recomiendo con los ojos cerrados.', tag: 'Cambió mi Vida' },
+  { name: 'Carmen A.', city: 'Montería', text: 'Mi mamá de 72 años no podía ir al baño bien. Le compré ColiPlus y en una semana ya estaba regularizada. Ella dice que es el mejor regalo que le he dado.', tag: '100% Recomendado' },
+  { name: 'Natalia A.', city: 'Cúcuta', text: 'La pesadez después de comer me quitaba las ganas de hacer cualquier cosa. Era como si tuviera una piedra en el estómago. Con ColiPlus, la comida ya no me pesa.', tag: 'Superó mis Expectativas' },
+  { name: 'Juliana V.', city: 'Armenia', text: 'No quería depender de pastillas. Buscaba algo natural. ColiPlus tiene ingredientes que reconozco y confío. Es fibra de verdad, no químicos raros.', tag: '100% Recomendado' },
+  { name: 'Beatriz A.', city: 'Popayán', text: 'Compré solo 1 frasco para probar. Gran error. A las 2 semanas ya quería más. Ahora compro de 3 en 3. No me quedo sin mi ColiPlus ni un día.', tag: 'Cambió mi Vida' },
+  { name: 'Ángela R.', city: 'Sincelejo', text: 'Mi colon se saturó por años de mala alimentación. El médico me dijo que necesitaba fibra urgente. Encontré ColiPlus y ha sido mi salvación. Ya no tengo esas crisis de dolor.', tag: 'Superó mis Expectativas' },
 ]
 
 const INGREDIENTS = [
-  { name: 'Psyllium (Plantago ovata)', desc: 'Fibra soluble que forma un gel suave en el intestino, facilitando el tránsito sin irritar. Es la fibra más recomendada por gastroenterólogos.', icon: '🌿' },
-  { name: 'Inulina de Agave', desc: 'Prebiótico natural que alimenta las bacterias buenas de tu intestino. Mejora la flora intestinal y potencia tu digestión desde la raíz.', icon: '🌱' },
-  { name: 'Fibra de Avena', desc: 'Regula el azúcar en sangre y ayuda a reducir el colesterol. Una fibra suave que protege tu intestino mientras nutre tu cuerpo.', icon: '🌾' },
-  { name: 'Extracto de Sen', desc: 'Planta natural usada por siglos para aliviar el estreñimiento ocasional. Actúa suavemente estimulando el movimiento intestinal.', icon: '🍃' },
-  { name: 'Papaya enzimática', desc: 'Contiene papaína, una enzima que descompuye los alimentos y reduce la hinchazón. Ideal para la pesadez después de comer.', icon: '🧡' },
-  { name: 'Probióticos (Lactobacillus)', desc: 'Bacterias beneficiosas que restauran el equilibrio de tu microbioma intestinal. Refuerzan tus defensas y mejoran la digestión.', icon: '🦠' },
+  { name: 'Linaza', desc: 'Rica en fibra soluble y omega-3. Ayuda a suavizar el tránsito intestinal y reduce la inflamación del colon de forma natural.', icon: '🌿' },
+  { name: 'Pitaya', desc: 'Superfruta con alto contenido de fibra y antioxidantes. Combate el estreñimiento y promueve una piel saludable y radiante.', icon: '🐉' },
+  { name: 'Flor de Jamaica', desc: 'Diurético natural que ayuda a desinflamar el sistema digestivo. Rica en vitamina C y antioxidantes que protegen tu colon.', icon: '🌺' },
+  { name: 'Fibra Prebiótica', desc: 'Alimenta las bacterias beneficiosas de tu intestino. Mejora la flora intestinal y potencia tu digestión desde la raíz.', icon: '🌱' },
+  { name: 'Alcachofa', desc: 'Estimula la producción de bilis y mejora la digestión de las grasas. Desintoxica el hígado y protege tu sistema digestivo.', icon: '🥬' },
+  { name: 'Semillas de Chía', desc: 'Expanden en el estómago formando un gel que facilita el tránsito intestinal. Rica en omega-3 y fibra soluble.', icon: '⚫' },
+  { name: 'Espirulina', desc: 'Superalimento rico en proteínas y clorofila que desintoxica el organismo y fortalece el sistema inmunológico.', icon: '🦠' },
+  { name: 'Noni', desc: 'Fruta tropical con propiedades antiinflamatorias y antioxidantes. Mejora la digestión y fortalece las defensas naturales.', icon: '🍈' },
+  { name: 'Té Verde', desc: 'Potente antioxidante que acelera el metabolismo y mejora la digestión. Ayuda a reducir la inflamación abdominal.', icon: '🍵' },
+  { name: 'Manzana', desc: 'Fuente natural de pectina y fibra soluble. Regula el tránsito intestinal y aporta saciedad sin pesadez.', icon: '🍎' },
+]
+
+const INGREDIENT_DEEP = [
+  { name: 'Linaza', benefit: 'Forma un gel suave que lubrica el intestino, facilitando la evacuación sin irritar. Combate el estreñimiento crónico de forma natural.', detail: 'Estudios clínicos demuestran que la linaza aumenta la frecuencia de deposiciones en un 30% en solo 2 semanas.' },
+  { name: 'Pitaya', benefit: 'Su alta concentración de fibra y prebióticos alimentan las bacterias buenas del intestino, mejorando la flora intestinal y la piel.', detail: 'La pitaya contiene oligosacáridos que estimulan el crecimiento de bifidobacterias, esenciales para una digestión saludable.' },
+  { name: 'Alcachofa', benefit: 'Estimula la producción de bilis, mejorando la digestión de grasas y eliminando toxinas del hígado y el colon.', detail: 'La cinarina de la alcachofa aumenta la producción biliar hasta un 40%, acelerando la desintoxicación natural del cuerpo.' },
+  { name: 'Fibra Prebiótica', benefit: 'Actúa como alimento para las bacterias beneficiosas, multiplicándolas y creando un ambiente intestinal óptimo.', detail: 'Los prebióticos aumentan la absorción de calcio y magnesio, fortaleciendo no solo tu digestión sino tu salud ósea.' },
+  { name: 'Semillas de Chía', benefit: 'Absorben hasta 12 veces su peso en agua, formando un gel que limpia las paredes intestinales y facilita el tránsito.', detail: 'Las semillas de chía proporcionan saciedad prolongada y regulan los niveles de azúcar en sangre.' },
+  { name: 'Espirulina', benefit: 'Su clorofila desintoxica el colon y el hígado, mientras sus proteínas reparan la mucosa intestinal dañada.', detail: 'La espirulina contiene ficocianina, un pigmento con propiedades antiinflamatorias comprobadas para el sistema digestivo.' },
 ]
 
 const FAQS = [
-  { q: '¿Qué es Fibra Coli exactamente?', a: 'Fibra Coli es un suplemento alimenticio formulado con fibra natural, prebióticos y probióticos diseñado específicamente para mejorar tu tránsito intestinal, reducir la inflamación abdominal y recuperar el bienestar digestivo. No es un medicamento, es un complemento alimenticio.' },
-  { q: '¿Cuánto tiempo tarda en hacer efecto?', a: 'La mayoría de nuestras clientas notan los primeros cambios entre el día 3 y el día 7 de uso constante. Los resultados más significativos se ven a partir de la segunda semana. Cada organismo es diferente, por eso recomendamos tomarlo mínimo 30 días.' },
-  { q: '¿Tiene efectos secundarios?', a: 'Fibra Coli está hecho con ingredientes naturales. En los primeros días, algunas personas pueden experimentar un leve aumento de gases, lo cual es normal cuando el intestino se está regulando. Esto desaparece en pocos días.' },
-  { q: '¿Puedo tomarlo si tomo otros medicamentos?', a: 'Si estás bajo tratamiento médico, te recomendamos consultar con tu médico antes de iniciar cualquier suplemento. En general, Fibra Coli es compatible con la mayoría de medicamentos, pero siempre es mejor consultar.' },
-  { q: '¿Cómo se toma?', a: 'Muy fácil: 1 cucharada disuelta en un vaso de agua, jugo o bebida de tu preferencia, preferiblemente en ayunas o antes de la primera comida del día. Sabor agradable y fácil de mezclar.' },
-  { q: '¿Es seguro para personas mayores?', a: 'Sí, Fibra Coli es seguro para adultos de todas las edades. Muchas de nuestras clientas tienen más de 60 años y lo toman con excelentes resultados. Si tienes condiciones médicas específicas, consulta con tu médico.' },
-  { q: '¿Puedo tomarlo durante el embarazo o lactancia?', a: 'Si estás embarazada o en período de lactancia, es fundamental que consultes con tu médico antes de tomar cualquier suplemento alimenticio, incluyendo Fibra Coli.' },
-  { q: '¿El pago contra entrega es real?', a: '¡Sí, 100% real! Solo pagas cuando recibes tu pedido en la puerta de tu casa. No te pedimos pagos por adelantado ni datos de tarjeta. Es la forma más segura de comprar.' },
+  { q: '¿Qué es ColiPlus?', a: 'ColiPlus es una fibra prebiótica natural formulada específicamente para el bienestar digestivo. Contiene 10 ingredientes naturales como Linaza, Pitaya, Alcachofa y más, que trabajan en conjunto para limpiar tu colon, combatir el estreñimiento y reducir la inflamación. No es un laxante agresivo, es un suplemento alimenticio registrado ante el INVIMA con registro NSA-0012423-2022.' },
+  { q: '¿Cuánto tiempo tarda en hacer efecto?', a: 'La mayoría de nuestros usuarios notan los primeros cambios entre el día 3 y el día 7 de uso constante. Los resultados más significativos se ven a partir de la segunda semana. Cada organismo es diferente, por eso recomendamos tomarlo mínimo 30 días para sentir el cambio completo.' },
+  { q: '¿Cómo se consume?', a: 'Muy fácil: disuelve 1 cucharada dosificadora en un vaso de agua. No necesita endulzar porque tiene un sabor agradable natural. Tómalo 1-2 veces al día: en la mañana en ayunas o en la noche antes de dormir. Es así de simple.' },
+  { q: '¿Quiénes pueden tomarlo?', a: 'Personas desde 14 años en adelante. Es seguro para diabéticos e hipertensos ya que NO contiene azúcar NI edulcorantes artificiales. Ideal para quienes sufren de estreñimiento, inflamación, pesadez o digestión lenta.' },
+  { q: '¿Quiénes NO pueden tomarlo?', a: 'Mujeres embarazadas y menores de 14 años. Si tienes alguna condición médica específica, consulta con tu médico antes de iniciar cualquier suplemento.' },
+  { q: '¿Pueden tomarlo diabéticos e hipertensos?', a: '¡Sí! ColiPlus NO contiene azúcar ni edulcorantes artificiales. Es completamente seguro para personas con diabetes o hipertensión. Sus ingredientes son 100% naturales.' },
+  { q: '¿Tiene efectos secundarios?', a: 'ColiPlus está hecho con ingredientes naturales registrados ante el INVIMA. En los primeros días, algunas personas pueden experimentar un leve aumento de gases, lo cual es normal cuando el intestino se está regulando y limpiando. Esto desaparece en pocos días.' },
+  { q: '¿Está registrado ante el INVIMA?', a: 'Sí, ColiPlus cuenta con registro INVIMA NSA-0012423-2022. Esto garantiza que el producto cumple con todos los requisitos de seguridad y calidad exigidos por las autoridades sanitarias colombianas.' },
+  { q: '¿El pago contra entrega es real?', a: '¡Sí, 100% real! Solo pagas cuando recibes tu pedido en la puerta de tu casa. No te pedimos pagos por adelantado ni datos de tarjeta. Es la forma más segura de comprar en Colombia.' },
   { q: '¿Hacen envíos a toda Colombia?', a: 'Sí, hacemos envíos a todas las ciudades y municipios de Colombia. El tiempo promedio de entrega es de 2 a 5 días hábiles, dependiendo de tu ubicación.' },
-  { q: '¿Qué pasa si no me funciona?', a: 'Fibra Coli tiene una alta tasa de satisfacción. Sin embargo, si no ves resultados después de 30 días de uso constante, contáctanos por WhatsApp y te ayudamos. Tu satisfacción es nuestra prioridad.' },
-  { q: '¿Cuánto dura un frasco?', a: 'Cada frasco de Fibra Coli rinde para aproximadamente 30 días de uso continuo (1 toma diaria). Por eso recomendamos comprar 2 o 3 frascos para asegurar al menos 2-3 meses de tratamiento.' },
-  { q: '¿Puedo tomar más de una vez al día?', a: 'La dosis recomendada es 1 toma al día. Si sientes que necesitas más, puedes consultar con tu médico o escribirnos por WhatsApp para asesorarte personalmente.' },
-  { q: '¿El producto es original?', a: 'Sí, garantizamos que cada frasco de Fibra Coli es 100% original. Compras directo del fabricante autorizado. No vendemos imitaciones ni productos de dudosa procedencia.' },
-  { q: '¿Por qué es mejor que otras fibras?', a: 'Fibra Coli combina 6 ingredientes clave en una sola fórmula: fibra soluble, prebióticos, probióticos, enzimas digestivas y extractos naturales. Otras fibras solo tienen un ingrediente. Nosotros atacamos el problema desde todos los ángulos.' },
-  { q: '¿Cómo sé que no es una estafa?', a: 'Entendemos la preocupación. Por eso ofrecemos pago contra entrega: solo pagas cuando tienes el producto en tus manos. Además, puedes verificar nuestro número de WhatsApp, leer los testimonios reales de clientas colombianas, y contactarnos para cualquier duda antes de comprar.' },
+  { q: '¿Por qué es mejor que otras fibras?', a: 'ColiPlus combina 10 ingredientes naturales en una sola fórmula: Linaza, Pitaya, Flor de Jamaica, Fibra Prebiótica, Alcachofa, Chía, Espirulina, Noni, Té Verde y Manzana. Otras fibras solo tienen 1-2 ingredientes. Nosotros atacamos el problema desde todos los ángulos con una fórmula registrada ante el INVIMA.' },
+  { q: '¿Cuánto dura un frasco?', a: 'Cada frasco de ColiPlus rinde para aproximadamente 30 días de uso continuo (1 toma diaria). Por eso recomendamos comprar 2 o 3 frascos para asegurar al menos 2-3 meses de tratamiento completo.' },
+]
+
+const COMPARISON_ITEMS = [
+  { feature: 'Ingredientes naturales', coliplus: true, others: false },
+  { feature: 'Registro INVIMA', coliplus: true, others: false },
+  { feature: '10 ingredientes en 1', coliplus: true, others: false },
+  { feature: 'Sin azúcar ni edulcorantes', coliplus: true, others: false },
+  { feature: 'Sabor agradable', coliplus: true, others: false },
+  { feature: 'Sin efectos secundarios', coliplus: true, others: false },
+  { feature: 'Seguro para diabéticos', coliplus: true, others: false },
+  { feature: 'Prebiótico natural', coliplus: true, others: false },
+  { feature: 'Limpia el colon', coliplus: true, others: false },
+  { feature: 'Promueve piel saludable', coliplus: true, others: false },
+]
+
+const DISEASE_FACTS = [
+  'El 80% de las enfermedades comienzan en un colon sucio',
+  'El estreñimiento crónico afecta al 20% de la población colombiana',
+  'Un colon saturado puede acumular hasta 5 kg de residuos tóxicos',
+  'La inflamación abdominal es la queja digestiva #1 en consultas médicas',
+  'Los problemas digestivos reducen la calidad de vida en un 40%',
+  'Un colon limpio mejora la absorción de nutrientes hasta en un 60%',
 ]
 
 /* ─── HELPER: Scroll reveal wrapper ─── */
 
 function RevealOnScroll({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
   return (
     <motion.div
       ref={ref}
@@ -79,177 +113,270 @@ function RevealOnScroll({ children, className = '', delay = 0 }: { children: Rea
   )
 }
 
+/* ─── GIFT REMINDER STRIP ─── */
+
+function GiftReminder() {
+  return (
+    <div className="bg-gradient-to-r from-amber-500 to-amber-400 text-center py-2.5 px-4">
+      <p className="text-white text-sm font-bold flex items-center justify-center gap-2">
+        <Gift className="w-4 h-4" />
+        ¡OBSEQUIO GRATIS! Loción Termoactiva con cada pedido
+        <Gift className="w-4 h-4" />
+      </p>
+    </div>
+  )
+}
+
 /* ─── SECTION 1: HERO ─── */
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 via-white to-white">
-      {/* Decorative circles */}
-      <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full bg-emerald-100/50 blur-3xl" />
-      <div className="absolute top-1/2 -left-20 w-40 h-40 rounded-full bg-amber-100/40 blur-2xl" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-900">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-emerald-400 blur-3xl" />
+        <div className="absolute bottom-20 right-5 w-32 h-32 rounded-full bg-amber-400 blur-3xl" />
+      </div>
 
-      <div className="relative max-w-lg mx-auto px-4 pt-8 pb-6">
-        {/* Trust badge */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
-          <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1.5 rounded-full">
-            <ShieldCheck className="w-3.5 h-3.5" /> Pago contra entrega
-          </span>
-          <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1.5 rounded-full">
-            <Truck className="w-3.5 h-3.5" /> Envío nacional
-          </span>
-          <span className="inline-flex items-center gap-1 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1.5 rounded-full badge-pulse">
-            <Gift className="w-3.5 h-3.5" /> Obsequio GRATIS
+      <div className="relative max-w-lg mx-auto px-4 pt-6 pb-8">
+        {/* Users badge */}
+        <div className="flex justify-center mb-4">
+          <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full">
+            <Users className="w-3.5 h-3.5 text-amber-300" />
+            +8,700 Usuarios Confían en ColiPlus
           </span>
         </div>
 
-        {/* Headline */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center leading-tight text-gray-900 mb-3">
-          ¿Tu abdomen parece{' '}
-          <span className="gradient-text">hinchado</span>{' '}
-          antes de terminar el día?
-        </h1>
-
-        <p className="text-center text-gray-600 text-base sm:text-lg mb-5 leading-relaxed">
-          Esa pesadez, los gases y la inflamación <strong>no son normales</strong>. Miles de mujeres en Colombia ya recuperaron su bienestar digestivo con <strong>Fibra Coli</strong>.
-        </p>
-
         {/* Product image */}
         <div className="relative flex justify-center mb-5">
-          <div className="relative w-64 h-64 sm:w-72 sm:h-72">
+          <div className="relative w-72 h-72 sm:w-80 sm:h-80">
             <img
-              src="/images/product-main.png"
-              alt="Fibra Coli - Suplemento de fibra natural para la digestión"
+              src="/images/coliplus-hero.jpg"
+              alt="ColiPlus - Fibra Prebiótica Natural para Bienestar Digestivo"
               className="w-full h-full object-contain product-glow float-animation"
             />
           </div>
         </div>
 
-        {/* Quick benefits */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
+        {/* Headline */}
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center leading-tight text-white mb-3">
+          Fibra Prebiótica Natural para{' '}
+          <span className="text-amber-300">Bienestar Digestivo</span>
+        </h1>
+
+        <p className="text-center text-emerald-100 text-base sm:text-lg mb-5 leading-relaxed">
+          Limpia tu colon, combate el estreñimiento y elimina la inflamación con ingredientes 100% naturales.
+        </p>
+
+        {/* Key benefits with emoji */}
+        <div className="space-y-2 mb-5">
           {[
-            { icon: <Leaf className="w-4 h-4" />, text: '100% Natural' },
-            { icon: <Zap className="w-4 h-4" />, text: 'Resultados rápidos' },
-            { icon: <Shield className="w-4 h-4" />, text: 'Sin efectos secundarios' },
+            { emoji: '🫧', text: 'Desinflama tu abdomen y elimina la hinchazón' },
+            { emoji: '✨', text: 'Combate el estreñimiento de forma natural' },
+            { emoji: '💚', text: 'Equilibra tu digestión sin efectos secundarios' },
+            { emoji: '🌸', text: 'Promueve una piel saludable desde adentro' },
           ].map((b, i) => (
-            <div key={i} className="flex flex-col items-center gap-1 bg-white rounded-xl p-2.5 shadow-sm border border-emerald-100">
-              <span className="text-emerald-600">{b.icon}</span>
-              <span className="text-xs font-medium text-gray-700 text-center">{b.text}</span>
+            <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/10">
+              <span className="text-xl">{b.emoji}</span>
+              <span className="text-white text-sm font-medium">{b.text}</span>
             </div>
           ))}
         </div>
 
+        {/* INVIMA badge */}
+        <div className="flex justify-center mb-4">
+          <span className="inline-flex items-center gap-1.5 bg-emerald-700/50 border border-emerald-500/30 text-emerald-100 text-xs font-semibold px-3 py-1.5 rounded-full">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
+            Registro INVIMA: NSA-0012423-2022
+          </span>
+        </div>
+
         {/* Rating */}
-        <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="flex items-center justify-center gap-2 mb-5">
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
             ))}
           </div>
-          <span className="text-sm font-semibold text-gray-700">4.9/5</span>
-          <span className="text-xs text-gray-500">(2,847 opiniones)</span>
+          <span className="text-sm font-bold text-white">4.9/5</span>
+          <span className="text-xs text-emerald-200">(8,700+ opiniones)</span>
         </div>
 
         {/* CTA */}
         <a
           href="#oferta"
-          className="block w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-center font-bold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-emerald-200 transition-all duration-200 pulse-cta"
+          className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
         >
-          ¡Quiero mi Fibra Coli! 🌿
+          ¡QUIERO MI COLIPLUS AHORA! 🌿
         </a>
-        <p className="text-center text-xs text-gray-500 mt-2">Solo pagas cuando lo recibes · Envío a toda Colombia · <span className="text-amber-600 font-medium">🎁 Obsequio incluido</span></p>
+        <p className="text-center text-xs text-emerald-200 mt-2">
+          Solo pagas cuando lo recibes · Envío a toda Colombia · <span className="text-amber-300 font-semibold">🎁 Loción GRATIS</span>
+        </p>
       </div>
     </section>
   )
 }
 
-/* ─── SECTION 2: VIDEO ─── */
+/* ─── SECTION 2: TESTIMONIAL CAROUSEL ─── */
 
-function VideoSection() {
+function TestimonialCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const current = TESTIMONIALS[currentIndex]
+
   return (
-    <section className="bg-white py-10 px-4">
+    <section className="bg-gradient-to-b from-emerald-900 to-emerald-800 py-8 px-4">
       <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-rose-50 text-rose-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-2">
-              <MessageCircle className="w-3.5 h-3.5" /> VIDEO DE UNA CLIENTA REAL
-            </span>
-            <h2 className="text-2xl font-bold text-gray-900">Mira lo que dice Claudia de Medellín</h2>
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5">
+          <div className="flex items-center gap-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+            ))}
           </div>
-
-          {/* Video placeholder - UGC style */}
-          <div className="relative rounded-2xl overflow-hidden bg-gray-900 aspect-[9/16] max-w-xs mx-auto shadow-2xl">
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6">
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4">
-                <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1" />
-              </div>
-              <p className="text-sm opacity-80">Toca para ver el video</p>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold">C</div>
-                <div>
-                  <p className="text-white text-xs font-semibold">Claudia E.</p>
-                  <p className="text-white/70 text-[10px]">Medellín, Colombia</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-5 text-center">
-            <a
-              href="#oferta"
-              className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200 transition-all duration-200"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
             >
-              Yo también quiero esos resultados →
-            </a>
+              <p className="text-white text-sm leading-relaxed mb-3 italic">"{current.text}"</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-amber-300 text-sm font-bold">{current.name}</p>
+                  <p className="text-emerald-200 text-xs">{current.city}</p>
+                </div>
+                <span className="bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2 py-1 rounded-full border border-amber-400/30">
+                  {current.tag}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          {/* Dots */}
+          <div className="flex justify-center gap-1 mt-4">
+            {TESTIMONIALS.slice(0, 8).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === currentIndex % 8 ? 'bg-amber-400 w-5' : 'bg-white/30'
+                }`}
+              />
+            ))}
           </div>
-        </RevealOnScroll>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ─── SECTION 3: PAIN POINTS ─── */
+/* ─── SECTION 3: ¿POR QUÉ ELEGIRLO? ─── */
 
-function PainPointsSection() {
-  const pains = [
-    { icon: '🫧', title: 'Inflamación abdominal', desc: 'Tu barriga se hincha como un globo después de comer' },
-    { icon: '😫', title: 'Estreñimiento', desc: 'Días sin poder ir al baño, sintiéndote pesada y frustrada' },
-    { icon: '💨', title: 'Gases frecuentes', desc: 'Esos gases que te dan pena en reuniones y reuniones sociales' },
-    { icon: '🪨', title: 'Pesadez', desc: 'Como si tuvieras una piedra en el estómago todo el día' },
-    { icon: '🐌', title: 'Digestión lenta', desc: 'La comida parece quedarse horas sin digerirse' },
-    { icon: '😤', title: 'Malestar digestivo', desc: 'Esa sensación de colon saturado que no te deja tranquila' },
-  ]
-
+function WhyChooseSection() {
   return (
-    <section className="bg-gradient-to-b from-white to-rose-50/50 py-12 px-4">
+    <section className="bg-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-8">
-            <span className="text-rose-500 font-semibold text-sm uppercase tracking-wide">¿Te identificas?</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              ¿Te pasa esto <span className="text-rose-500">todos los días</span>?
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">La decisión inteligente</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              ¿POR QUÉ <span className="text-emerald-700">ELEGIRLO</span>?
             </h2>
-            <p className="text-gray-600 mt-2">No eres la única. Miles de mujeres en Colombia viven exactamente lo mismo.</p>
+          </div>
+        </RevealOnScroll>
+
+        {/* INVIMA prominently displayed */}
+        <RevealOnScroll>
+          <div className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-2 border-emerald-200 rounded-2xl p-5 text-center mb-6">
+            <ShieldCheck className="w-10 h-10 text-emerald-600 mx-auto mb-2" />
+            <h3 className="font-extrabold text-emerald-800 text-lg">Producto Registrado ante el INVIMA</h3>
+            <p className="text-emerald-700 text-sm mt-1">Registro: <span className="font-bold text-lg">NSA-0012423-2022</span></p>
+            <p className="text-emerald-600 text-xs mt-1">Garantizamos seguridad, calidad y cumplimiento normativo</p>
+          </div>
+        </RevealOnScroll>
+
+        {/* 3 benefit cards */}
+        <div className="space-y-4">
+          {[
+            {
+              icon: <Leaf className="w-8 h-8" />,
+              title: '100% Natural',
+              desc: '10 ingredientes naturales cuidadosamente seleccionados: Linaza, Pitaya, Flor de Jamaica, Alcachofa, Chía y más. Sin químicos, sin azúcar, sin edulcorantes artificiales.',
+              color: 'emerald',
+            },
+            {
+              icon: <ShieldCheck className="w-8 h-8" />,
+              title: 'Seguro y Efectivo',
+              desc: 'Registro INVIMA que respalda su seguridad. Sin efectos secundarios. Seguro para diabéticos e hipertensos. No es un laxante agresivo, es fibra que cuida tu intestino.',
+              color: 'amber',
+            },
+            {
+              icon: <Zap className="w-8 h-8" />,
+              title: 'Resultados Reales',
+              desc: 'Más de 8,700 usuarios ya recuperaron su bienestar digestivo. Desde el primer semana notarás: menos inflamación, mejor tránsito y más energía.',
+              color: 'emerald',
+            },
+          ].map((card, i) => (
+            <RevealOnScroll key={i} delay={i * 0.12}>
+              <div className={`bg-gradient-to-br ${card.color === 'emerald' ? 'from-emerald-50 to-white border-emerald-100' : 'from-amber-50 to-white border-amber-100'} border rounded-2xl p-5`}>
+                <div className="flex items-start gap-4">
+                  <div className={`w-14 h-14 rounded-xl ${card.color === 'emerald' ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'} flex items-center justify-center flex-shrink-0`}>
+                    {card.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">{card.title}</h3>
+                    <p className="text-sm text-gray-600 mt-1 leading-relaxed">{card.desc}</p>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── SECTION 4: INGREDIENTES ─── */
+
+function IngredientsSection() {
+  return (
+    <section className="bg-gradient-to-b from-gray-50 to-white py-12 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-8">
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Fórmula poderosa</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              INGREDIENTES
+            </h2>
+            <p className="text-gray-600 mt-2">10 ingredientes naturales que trabajan en conjunto por tu bienestar digestivo</p>
           </div>
         </RevealOnScroll>
 
         <div className="grid grid-cols-2 gap-3">
-          {pains.map((p, i) => (
-            <RevealOnScroll key={i} delay={i * 0.08}>
-              <div className="bg-white rounded-2xl p-4 shadow-sm border border-rose-100 hover:shadow-md transition-shadow">
-                <span className="text-2xl mb-2 block">{p.icon}</span>
-                <h3 className="font-bold text-sm text-gray-900 mb-1">{p.title}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
+          {INGREDIENTS.map((ing, i) => (
+            <RevealOnScroll key={i} delay={i * 0.06}>
+              <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:border-emerald-200 hover:shadow-md transition-all h-full">
+                <span className="text-3xl mb-2 block">{ing.icon}</span>
+                <h3 className="font-bold text-sm text-gray-900 mb-1">{ing.name}</h3>
+                <p className="text-[11px] text-gray-500 leading-relaxed">{ing.desc}</p>
               </div>
             </RevealOnScroll>
           ))}
         </div>
 
         <RevealOnScroll>
-          <div className="mt-6 bg-rose-50 border border-rose-200 rounded-2xl p-4 text-center">
-            <p className="text-rose-700 font-semibold text-sm">
-              Si tienes 2 o más de estos síntomas, tu cuerpo te está pidiendo ayuda. <strong>Fibra Coli fue creado exactamente para ti.</strong>
+          <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
+            <p className="text-emerald-700 text-sm font-medium">
+              🌿 Sin azúcar · Sin edulcorantes · Sin conservantes · Sin lactosa
             </p>
           </div>
         </RevealOnScroll>
@@ -258,102 +385,200 @@ function PainPointsSection() {
   )
 }
 
-/* ─── SECTION 4: PRODUCT PRESENTATION ─── */
+/* ─── SECTION 5: ¿CÓMO CONSUMIRLO? ─── */
 
-function ProductPresentation() {
+function HowToConsumeSection() {
   return (
     <section className="bg-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
-          <div className="text-center mb-6">
-            <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3">
-              <Leaf className="w-3.5 h-3.5" /> TU SOLUCIÓN NATURAL
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Conoce <span className="gradient-text">Fibra Coli</span>
+          <div className="text-center mb-8">
+            <span className="text-amber-600 font-bold text-sm uppercase tracking-wider">Súper fácil</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              ¿CÓMO <span className="text-emerald-700">CONSUMIRLO</span>?
             </h2>
-            <p className="text-gray-600 mt-2 leading-relaxed">
-              El suplemento de fibra natural que miles de mujeres en Colombia ya usan para recuperar su bienestar digestivo.
-            </p>
           </div>
         </RevealOnScroll>
 
-        {/* Product images gallery */}
-        <RevealOnScroll>
-          <div className="grid grid-cols-3 gap-2 mb-6">
-            <div className="rounded-xl overflow-hidden aspect-square bg-emerald-50 flex items-center justify-center">
-              <img src="/images/product-main.png" alt="Fibra Coli frontal" className="w-full h-full object-contain p-2" />
-            </div>
-            <div className="rounded-xl overflow-hidden aspect-square bg-gray-50">
-              <img src="/images/product-secondary.jpg" alt="Fibra Coli producto" className="w-full h-full object-cover" />
-            </div>
-            <div className="rounded-xl overflow-hidden aspect-square bg-gray-50">
-              <img src="/images/product-angle-1.jpg" alt="Fibra Coli detalle" className="w-full h-full object-cover" />
-            </div>
-          </div>
-        </RevealOnScroll>
-
-        {/* What it is */}
-        <RevealOnScroll>
-          <div className="bg-gradient-to-br from-emerald-50 to-white rounded-2xl p-5 border border-emerald-100 mb-4">
-            <h3 className="font-bold text-lg text-gray-900 mb-2">¿Qué es?</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Fibra Coli es una fórmula avanzada que combina <strong>fibra natural, prebióticos, probióticos y enzimas digestivas</strong> en un solo producto. Diseñado especialmente para mujeres que sufren de problemas digestivos como estreñimiento, inflamación y pesadez.
-            </p>
-          </div>
-        </RevealOnScroll>
-
-        <RevealOnScroll>
-          <div className="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-5 border border-amber-100 mb-4">
-            <h3 className="font-bold text-lg text-gray-900 mb-2">¿Para qué sirve?</h3>
-            <ul className="space-y-2">
-              {[
-                'Regularizar tu tránsito intestinal de forma natural',
-                'Reducir la inflamación y los gases abdominales',
-                'Mejorar la digestión y eliminar la pesadez',
-                'Alimentar las bacterias buenas de tu intestino',
-                'Recuperar el bienestar digestivo que mereces',
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </RevealOnScroll>
-
-        <RevealOnScroll>
-          <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-5 border border-purple-100">
-            <h3 className="font-bold text-lg text-gray-900 mb-2">¿Qué lo hace diferente?</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { title: 'Fórmula 6 en 1', desc: '6 ingredientes clave en un solo producto' },
-                { title: 'Sabor agradable', desc: 'No sabe a medicina, se toma fácil' },
-                { title: 'Sin laxantes agresivos', desc: 'Actúa suave sin irritar tu intestino' },
-                { title: 'Hecho para Colombia', desc: 'Pensado en las necesidades de la mujer colombiana' },
-              ].map((d, i) => (
-                <div key={i} className="bg-white rounded-xl p-3 shadow-sm">
-                  <p className="font-semibold text-xs text-gray-900">{d.title}</p>
-                  <p className="text-[11px] text-gray-500 mt-0.5">{d.desc}</p>
+        <div className="space-y-4">
+          {[
+            {
+              num: '1',
+              emoji: '🥄',
+              title: 'Disuelve 1 cucharada dosificadora',
+              desc: 'En un vaso de agua tibia o a temperatura ambiente. Se mezcla fácilmente.',
+            },
+            {
+              num: '2',
+              emoji: '🍯',
+              title: 'No necesita endulzar',
+              desc: 'Tiene un sabor agradable natural. Sin azúcar ni edulcorantes añadidos.',
+            },
+            {
+              num: '3',
+              emoji: '🕐',
+              title: '1-2 veces al día',
+              desc: 'En la mañana en ayunas o en la noche antes de dormir. Elige el momento que mejor se adapte a tu rutina.',
+            },
+          ].map((step, i) => (
+            <RevealOnScroll key={i} delay={i * 0.12}>
+              <div className="flex items-start gap-4 bg-gradient-to-r from-emerald-50 to-white rounded-2xl p-5 border border-emerald-100">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white flex-shrink-0 shadow-lg shadow-emerald-200">
+                  <span className="text-2xl">{step.emoji}</span>
                 </div>
-              ))}
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">Paso {step.num}</span>
+                  </div>
+                  <h3 className="font-bold text-gray-900">{step.title}</h3>
+                  <p className="text-sm text-gray-600 mt-1">{step.desc}</p>
+                </div>
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+
+        {/* Who can / Who can't */}
+        <RevealOnScroll>
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                <h4 className="font-bold text-emerald-800 text-sm">SÍ PUEDEN</h4>
+              </div>
+              <ul className="space-y-1.5">
+                {['Personas desde 14 años', 'Diabéticos', 'Hipertensos', 'Personas con estreñimiento'].map((item, i) => (
+                  <li key={i} className="flex items-start gap-1.5 text-xs text-emerald-700">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Ban className="w-5 h-5 text-rose-600" />
+                <h4 className="font-bold text-rose-800 text-sm">NO PUEDEN</h4>
+              </div>
+              <ul className="space-y-1.5">
+                {['Mujeres embarazadas', 'Menores de 14 años'].map((item, i) => (
+                  <li key={i} className="flex items-start gap-1.5 text-xs text-rose-700">
+                    <X className="w-3 h-3 text-rose-500 mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[10px] text-rose-500 mt-2 leading-relaxed">*Sin azúcar NI edulcorantes</p>
             </div>
           </div>
         </RevealOnScroll>
+      </div>
+    </section>
+  )
+}
 
-        {/* Mini social proof + CTA */}
+/* ─── SECTION 6: PRICING / OFERTA ─── */
+
+function PricingSection() {
+  return (
+    <section id="oferta" className="bg-gradient-to-b from-emerald-50 to-white py-12 px-4">
+      <div className="max-w-lg mx-auto">
         <RevealOnScroll>
-          <div className="mt-5 flex items-center justify-center gap-2 text-sm text-gray-500">
-            <Users className="w-4 h-4" />
-            <span>Más de <strong className="text-gray-700">12,000+</strong> clientas en Colombia</span>
+          <div className="text-center mb-8">
+            <span className="text-amber-600 font-bold text-sm uppercase tracking-wider">Oferta especial</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              ELIGE TU <span className="text-emerald-700">PLAN</span>
+            </h2>
+            <p className="text-gray-600 mt-2 text-sm">Pago contra entrega · Solo pagas cuando recibes tu pedido</p>
           </div>
-          <div className="mt-3 text-center">
+        </RevealOnScroll>
+
+        <div className="space-y-4">
+          {/* 1 unidad */}
+          <RevealOnScroll>
+            <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-emerald-300 transition-colors">
+              <img src="/images/coliplus-1unidad.png" alt="ColiPlus 1 Unidad - $75,900" className="w-full object-contain" />
+            </div>
+          </RevealOnScroll>
+
+          {/* 2 unidades */}
+          <RevealOnScroll delay={0.1}>
+            <div className="bg-white rounded-2xl border-2 border-amber-300 overflow-hidden relative hover:border-amber-400 transition-colors">
+              <div className="absolute top-3 right-3 bg-amber-400 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full z-10 shadow-md">
+                🔥 MÁS POPULAR
+              </div>
+              <img src="/images/coliplus-2unidades.png" alt="ColiPlus 2 Unidades Promo" className="w-full object-contain" />
+            </div>
+          </RevealOnScroll>
+
+          {/* 3 unidades */}
+          <RevealOnScroll delay={0.2}>
+            <div className="bg-white rounded-2xl border-2 border-emerald-400 overflow-hidden relative hover:border-emerald-500 transition-colors">
+              <div className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-extrabold px-3 py-1 rounded-full z-10 shadow-md">
+                🏆 MEJOR VALOR
+              </div>
+              <img src="/images/coliplus-3unidades.png" alt="ColiPlus 3 Unidades - Pague 2 Lleve 3" className="w-full object-contain" />
+            </div>
+          </RevealOnScroll>
+        </div>
+
+        <RevealOnScroll>
+          <div className="mt-6 text-center">
             <a
               href="#oferta"
-              className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
+              className="block w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-emerald-200 transition-all duration-200 pulse-cta"
             >
-              Quiero probar Fibra Coli →
+              🛒 ¡ORDENAR AHORA! Pago contra entrega
+            </a>
+            <div className="flex items-center justify-center gap-3 mt-3">
+              <img src="/images/pagos-seguros.png" alt="Pagos seguros" className="h-8 object-contain" />
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              <Lock className="w-3 h-3 inline mr-1" />
+              Compra segura · Solo pagas al recibir · <span className="text-amber-600 font-semibold">🎁 Loción GRATIS incluida</span>
+            </p>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  )
+}
+
+/* ─── SECTION 7: ¿SABÍAS QUE...? (PROBLEM) ─── */
+
+function DidYouKnowSection() {
+  return (
+    <section className="bg-gradient-to-b from-rose-50 to-rose-100/50 py-12 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-6">
+            <span className="text-rose-500 font-bold text-sm uppercase tracking-wider">¡Alerta!</span>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 mt-1 leading-tight px-2">
+              ¿Sabías que las enfermedades más comunes son a causa de un <span className="text-rose-500">colon sucio</span>?
+            </h2>
+          </div>
+        </RevealOnScroll>
+
+        <div className="space-y-3">
+          {DISEASE_FACTS.map((fact, i) => (
+            <RevealOnScroll key={i} delay={i * 0.08}>
+              <div className="flex items-start gap-3 bg-white rounded-xl p-3.5 border border-rose-100 shadow-sm">
+                <AlertCircle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-700 leading-relaxed">{fact}</p>
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+
+        <RevealOnScroll>
+          <div className="mt-6 bg-rose-600 text-white rounded-2xl p-5 text-center">
+            <p className="font-bold text-base mb-2">¡No esperes a que sea demasiado tarde!</p>
+            <p className="text-rose-100 text-sm mb-4">Tu cuerpo necesita fibra prebiótica para mantener el colon limpio y funcionando correctamente.</p>
+            <a
+              href="#oferta"
+              className="inline-block bg-white text-rose-600 font-extrabold text-base py-3 px-8 rounded-2xl shadow-lg transition-all hover:bg-rose-50"
+            >
+              Quiero limpiar mi colon YA →
             </a>
           </div>
         </RevealOnScroll>
@@ -362,41 +587,42 @@ function ProductPresentation() {
   )
 }
 
-/* ─── SECTION 5: BENEFITS ─── */
+/* ─── SECTION 8: BENEFITS CHECKLIST ─── */
 
-function BenefitsSection() {
+function BenefitsChecklist() {
   const benefits = [
-    { icon: <RefreshCw className="w-6 h-6" />, title: 'Tránsito regular', desc: 'Ve al baño sin esfuerzo todos los días, de forma natural y constante.' },
-    { icon: <Droplets className="w-6 h-6" />, title: 'Cero inflamación', desc: 'Despídete de la barriga hinchada. Tu abdomen se sentirá plano y ligero.' },
-    { icon: <Wind className="w-6 h-6" />, title: 'Adiós gases', desc: 'Reduce los gases y la molestia que te causan pena en público.' },
-    { icon: <Heart className="w-6 h-6" />, title: 'Digestión tranquila', desc: 'Come sin miedo a sentir pesadez o malestar después de cada comida.' },
-    { icon: <Zap className="w-6 h-6" />, title: 'Más energía', desc: 'Un intestino sano significa más vitalidad y mejor disposición.' },
-    { icon: <Shield className="w-6 h-6" />, title: 'Flora protegida', desc: 'Prebióticos y probióticos que cuidan tu microbioma intestinal.' },
+    'Mejora la salud del colon naturalmente',
+    'Limpia el sistema digestivo de toxinas',
+    'Combate el estreñimiento sin irritar',
+    'Elimina la inflamación y la hinchazón',
+    'Alivia la pesadez después de comer',
+    'Equilibra la digestión de forma natural',
+    'Promueve una piel saludable y radiante',
+    'Regula el tránsito intestinal',
+    'Reduce los gases y la molestia abdominal',
+    'Seguro para diabéticos e hipertensos',
+    'Sin azúcar ni edulcorantes artificiales',
+    'Sabor agradable, fácil de consumir',
   ]
 
   return (
-    <section className="bg-gradient-to-b from-emerald-50/50 to-white py-12 px-4">
+    <section className="bg-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Resultados reales</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Lo que <span className="gradient-text">Fibra Coli</span> hace por ti
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Todo lo que hace por ti</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              Beneficios de <span className="text-emerald-700">ColiPlus</span>
             </h2>
           </div>
         </RevealOnScroll>
 
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {benefits.map((b, i) => (
-            <RevealOnScroll key={i} delay={i * 0.08}>
-              <div className="flex items-start gap-4 bg-white rounded-2xl p-4 shadow-sm border border-emerald-50 hover:border-emerald-200 transition-colors">
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0">
-                  {b.icon}
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900">{b.title}</h3>
-                  <p className="text-sm text-gray-600 mt-0.5">{b.desc}</p>
-                </div>
+            <RevealOnScroll key={i} delay={i * 0.05}>
+              <div className="flex items-start gap-2.5 bg-emerald-50/50 rounded-xl p-3 border border-emerald-100">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-gray-700 font-medium">{b}</span>
               </div>
             </RevealOnScroll>
           ))}
@@ -417,75 +643,70 @@ function BenefitsSection() {
   )
 }
 
-/* Wind icon fallback */
-function Wind(props: React.SVGProps<SVGSVGElement>) {
+/* ─── SECTION 9: INVIMA REGISTRATION ─── */
+
+function InvimaSection() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
-      <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
-      <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
-    </svg>
+    <section className="bg-gradient-to-b from-emerald-800 to-emerald-900 py-10 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center">
+            <ShieldCheck className="w-16 h-16 text-amber-300 mx-auto mb-3" />
+            <h2 className="text-2xl font-extrabold text-white mb-2">Producto Registrado ante el INVIMA</h2>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 max-w-sm mx-auto">
+              <p className="text-amber-300 text-lg font-bold mb-1">Registro INVIMA</p>
+              <p className="text-white text-3xl font-extrabold tracking-wide mb-3">NSA-0012423-2022</p>
+              <div className="w-16 h-0.5 bg-amber-400 mx-auto mb-3" />
+              <p className="text-emerald-100 text-sm leading-relaxed">
+                Este registro garantiza que ColiPlus cumple con todos los requisitos de seguridad, calidad y eficacia exigidos por las autoridades sanitarias colombianas.
+              </p>
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-4">
+              <img src="/images/sellos-adara.png" alt="Certificaciones y sellos" className="h-12 object-contain opacity-90" />
+            </div>
+            <p className="text-emerald-200 text-xs mt-3">Compra con confianza. Producto 100% original y certificado.</p>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
   )
 }
 
-/* ─── SECTION 6: HOW IT WORKS ─── */
+/* ─── SECTION 10: ¿POR QUÉ ES TAN EFECTIVO? ─── */
 
-function HowItWorksSection() {
-  const steps = [
-    {
-      num: '1',
-      title: 'Toma tu Fibra Coli',
-      desc: 'Disuelve 1 cucharada en agua, jugo o tu bebida favorita. Sabor agradable, fácil de preparar.',
-      icon: <Droplets className="w-8 h-8" />,
-    },
-    {
-      num: '2',
-      title: 'La fibra actúa',
-      desc: 'Los ingredientes naturales trabajan suavemente en tu intestino, regulando el tránsito y reduciendo la inflamación.',
-      icon: <RefreshCw className="w-8 h-8" />,
-    },
-    {
-      num: '3',
-      title: 'Recupera tu bienestar',
-      desc: 'En pocos días sientes la diferencia: menos gases, mejor digestión y una sensación de ligereza que no habías sentido en años.',
-      icon: <Heart className="w-8 h-8" />,
-    },
-  ]
-
+function WhyEffectiveSection() {
   return (
     <section className="bg-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-8">
-            <span className="text-amber-600 font-semibold text-sm uppercase tracking-wide">Súper fácil</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              ¿Cómo funciona <span className="gradient-text">Fibra Coli</span>?
+            <span className="text-amber-600 font-bold text-sm uppercase tracking-wider">La ciencia detrás</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              ¿Por qué es tan <span className="text-emerald-700">efectivo</span>?
             </h2>
+            <p className="text-gray-600 mt-2 text-sm">Cada ingrediente fue seleccionado por su efecto comprobado en la salud digestiva</p>
           </div>
         </RevealOnScroll>
 
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-emerald-300 via-emerald-400 to-emerald-300" />
-
-          <div className="space-y-6">
-            {steps.map((s, i) => (
-              <RevealOnScroll key={i} delay={i * 0.15}>
-                <div className="relative flex items-start gap-5">
-                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-200 flex-shrink-0">
-                    {s.icon}
+        <div className="space-y-4">
+          {INGREDIENT_DEEP.map((ing, i) => (
+            <RevealOnScroll key={i} delay={i * 0.1}>
+              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
+                    <Leaf className="w-5 h-5 text-emerald-600" />
                   </div>
-                  <div className="bg-gray-50 rounded-2xl p-4 flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">Paso {s.num}</span>
-                    </div>
-                    <h3 className="font-bold text-gray-900 text-lg">{s.title}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{s.desc}</p>
-                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg">{ing.name}</h3>
                 </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+                <p className="text-sm text-gray-700 leading-relaxed mb-2">{ing.benefit}</p>
+                <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
+                  <p className="text-xs text-emerald-700 leading-relaxed">
+                    <strong>💡 Dato clave:</strong> {ing.detail}
+                  </p>
+                </div>
+              </div>
+            </RevealOnScroll>
+          ))}
         </div>
 
         <RevealOnScroll>
@@ -494,7 +715,7 @@ function HowItWorksSection() {
               href="#oferta"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
-              Empezar mi transformación →
+              Experimenta la diferencia →
             </a>
           </div>
         </RevealOnScroll>
@@ -503,151 +724,87 @@ function HowItWorksSection() {
   )
 }
 
-/* ─── SECTION 7: INGREDIENTS ─── */
+/* ─── SECTION 11: ¿POR QUÉ ES TU MEJOR OPCIÓN? ─── */
 
-function IngredientsSection() {
-  return (
-    <section className="bg-gradient-to-b from-emerald-50/30 to-white py-12 px-4">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Transparencia total</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Ingredientes <span className="gradient-text">naturales y efectivos</span>
-            </h2>
-            <p className="text-gray-600 mt-2">Cada ingrediente fue seleccionado por su efecto comprobado en la salud digestiva.</p>
-          </div>
-        </RevealOnScroll>
-
-        <div className="space-y-3">
-          {INGREDIENTS.map((ing, i) => (
-            <RevealOnScroll key={i} delay={i * 0.08}>
-              <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:border-emerald-200 transition-colors">
-                <div className="flex items-start gap-3">
-                  <span className="text-3xl flex-shrink-0">{ing.icon}</span>
-                  <div>
-                    <h3 className="font-bold text-sm text-gray-900">{ing.name}</h3>
-                    <p className="text-xs text-gray-600 mt-1 leading-relaxed">{ing.desc}</p>
-                  </div>
-                </div>
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
-
-        <RevealOnScroll>
-          <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
-            <p className="text-emerald-700 text-sm font-medium">
-              🌿 Sin colorantes artificiales · Sin conservantes agresivos · Sin lactosa · Sin gluten
-            </p>
-          </div>
-        </RevealOnScroll>
-      </div>
-    </section>
-  )
-}
-
-/* ─── SECTION 8: BEFORE VS AFTER ─── */
-
-function BeforeAfterSection() {
-  return (
-    <section className="bg-white py-12 px-4">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-8">
-            <span className="text-amber-600 font-semibold text-sm uppercase tracking-wide">La transformación</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Antes vs. <span className="gradient-text">Después</span>
-            </h2>
-          </div>
-        </RevealOnScroll>
-
-        <div className="grid grid-cols-2 gap-3">
-          {/* Before */}
-          <RevealOnScroll>
-            <div className="bg-rose-50 rounded-2xl p-4 border border-rose-200 h-full">
-              <div className="text-center mb-3">
-                <span className="inline-flex items-center gap-1 bg-rose-100 text-rose-600 text-xs font-bold px-3 py-1 rounded-full">
-                  <X className="w-3 h-3" /> ANTES
-                </span>
-              </div>
-              <ul className="space-y-2.5">
-                {[
-                  'Abdomen inflamado',
-                  'Estreñimiento constante',
-                  'Gases todo el día',
-                  'Pesadez después de comer',
-                  'Digestión lenta y pesada',
-                  'Malestar general',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-xs text-rose-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </RevealOnScroll>
-
-          {/* After */}
-          <RevealOnScroll delay={0.15}>
-            <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 h-full">
-              <div className="text-center mb-3">
-                <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full">
-                  <CheckCircle2 className="w-3 h-3" /> DESPUÉS
-                </span>
-              </div>
-              <ul className="space-y-2.5">
-                {[
-                  'Barriga desinflamada',
-                  'Tránsito intestinal regular',
-                  'Gases reducidos notablemente',
-                  'Comer sin sentir pesadez',
-                  'Digestión tranquila y ligera',
-                  'Bienestar digestivo total',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-xs text-emerald-700">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </RevealOnScroll>
-        </div>
-
-        <RevealOnScroll>
-          <p className="text-center text-xs text-gray-500 mt-4">
-            *Los resultados pueden variar según cada persona. Este producto no reemplaza el tratamiento médico.
-          </p>
-          <div className="mt-4 text-center">
-            <a
-              href="#oferta"
-              className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
-            >
-              Quiero estar en el "Después" →
-            </a>
-          </div>
-        </RevealOnScroll>
-      </div>
-    </section>
-  )
-}
-
-/* ─── SECTION 9: TESTIMONIALS (WhatsApp style) ─── */
-
-function TestimonialsSection() {
-  const [showAll, setShowAll] = useState(false)
-  const displayed = showAll ? TESTIMONIALS : TESTIMONIALS.slice(0, 6)
-
+function BestOptionSection() {
   return (
     <section className="bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Historias reales</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Lo que dicen nuestras <span className="gradient-text">clientas</span>
+            <span className="text-amber-600 font-bold text-sm uppercase tracking-wider">Sin comparación</span>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 mt-1 leading-tight">
+              ¿Por qué es Tu <span className="text-emerald-700">Mejor Opción</span>?
+            </h2>
+            <p className="text-gray-600 mt-2 text-sm">Compara y decide tú misma</p>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+            {/* Header */}
+            <div className="grid grid-cols-3 bg-gray-50 border-b border-gray-200">
+              <div className="p-3 text-xs font-bold text-gray-500">CARACTERÍSTICA</div>
+              <div className="p-3 text-center text-xs font-extrabold text-emerald-700 bg-emerald-50">COLIPLUS</div>
+              <div className="p-3 text-center text-xs font-bold text-gray-400">OTRAS FIBRAS</div>
+            </div>
+            {/* Rows */}
+            {COMPARISON_ITEMS.map((item, i) => (
+              <div key={i} className={`grid grid-cols-3 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'} ${i < COMPARISON_ITEMS.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                <div className="p-3 text-xs text-gray-600 font-medium">{item.feature}</div>
+                <div className="p-3 text-center bg-emerald-50/30">
+                  {item.coliplus ? (
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500 mx-auto" />
+                  ) : (
+                    <X className="w-5 h-5 text-gray-300 mx-auto" />
+                  )}
+                </div>
+                <div className="p-3 text-center">
+                  {item.others ? (
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500 mx-auto" />
+                  ) : (
+                    <X className="w-5 h-5 text-red-400 mx-auto" />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
+            <p className="text-emerald-700 text-sm font-bold">
+              ✅ ColiPlus es la única fibra con 10 ingredientes naturales, registro INVIMA y segura para diabéticos
+            </p>
+          </div>
+          <div className="mt-4 text-center">
+            <a
+              href="#oferta"
+              className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
+            >
+              Elige la mejor opción →
+            </a>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  )
+}
+
+/* ─── SECTION 12: MORE TESTIMONIALS ─── */
+
+function MoreTestimonialsSection() {
+  const [showAll, setShowAll] = useState(false)
+  const displayed = showAll ? TESTIMONIALS : TESTIMONIALS.slice(0, 6)
+
+  return (
+    <section className="bg-white py-12 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-8">
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Historias reales</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              Lo que dicen nuestros <span className="text-emerald-700">usuarios</span>
             </h2>
             <div className="flex items-center justify-center gap-2 mt-2">
               <div className="flex gap-0.5">
@@ -655,47 +812,34 @@ function TestimonialsSection() {
                   <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <span className="text-sm text-gray-600 font-semibold">4.9/5</span>
-              <span className="text-xs text-gray-500">basado en 2,847 opiniones</span>
+              <span className="text-sm text-gray-600 font-bold">4.9/5</span>
+              <span className="text-xs text-gray-500">(8,700+ opiniones)</span>
             </div>
           </div>
         </RevealOnScroll>
 
-        <div className="space-y-4 max-h-[600px] overflow-y-auto custom-scrollbar pr-1">
+        <div className="space-y-4 max-h-[700px] overflow-y-auto custom-scrollbar pr-1">
           {displayed.map((t, i) => (
             <RevealOnScroll key={i} delay={i * 0.05}>
-              <div className="testimonial-card bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
-                {/* WhatsApp header */}
-                <div className="flex items-center gap-2.5 mb-2">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                    style={{ backgroundColor: t.color }}
-                  >
-                    {t.initials}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                      <p className="font-semibold text-sm text-gray-900 truncate">{t.name}</p>
-                      <span className="text-[10px] text-gray-400 flex-shrink-0">Hoy</span>
-                    </div>
+              <div className="testimonial-card bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <p className="font-bold text-sm text-gray-900">{t.name}</p>
                     <p className="text-xs text-gray-500">{t.city} · <span className="text-emerald-600">Compra verificada ✓</span></p>
                   </div>
-                </div>
-                {/* Chat bubble */}
-                <div className="ml-12">
-                  <div className="whatsapp-bubble">
-                    <p className="text-gray-800 text-[13px] leading-relaxed">{t.text}</p>
-                    <div className="flex items-center justify-end gap-1 mt-1">
-                      <span className="text-[10px] text-gray-400">12:{String(30 + i).padStart(2, '0')} PM</span>
-                      <span className="text-[10px] text-blue-500">✓✓</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Objection tag */}
-                <div className="ml-12 mt-1.5">
-                  <span className="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
-                    Superó: {t.objection}
+                  <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${
+                    t.tag === 'Cambió mi Vida' ? 'bg-emerald-100 text-emerald-700' :
+                    t.tag === 'Superó mis Expectativas' ? 'bg-amber-100 text-amber-700' :
+                    'bg-purple-100 text-purple-700'
+                  }`}>
+                    {t.tag}
                   </span>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed italic">"{t.text}"</p>
+                <div className="flex gap-0.5 mt-2">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
                 </div>
               </div>
             </RevealOnScroll>
@@ -703,366 +847,15 @@ function TestimonialsSection() {
         </div>
 
         {!showAll && (
-          <div className="mt-4 text-center">
+          <RevealOnScroll>
             <button
               onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm hover:text-emerald-700"
+              className="mt-4 w-full text-center text-sm font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 py-3 rounded-xl transition-colors"
             >
-              Ver los {TESTIMONIALS.length} testimonios <ChevronDown className="w-4 h-4" />
+              Ver más testimonios ({TESTIMONIALS.length - 6} más) ↓
             </button>
-          </div>
+          </RevealOnScroll>
         )}
-
-        <RevealOnScroll>
-          <div className="mt-5 text-center">
-            <a
-              href="#oferta"
-              className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
-            >
-              Yo también quiero resultados así →
-            </a>
-          </div>
-        </RevealOnScroll>
-      </div>
-    </section>
-  )
-}
-
-/* ─── SECTION 10: SOCIAL PROOF ─── */
-
-function SocialProofSection() {
-  const stats = [
-    { number: '12,000+', label: 'Clientas en Colombia', icon: <Users className="w-6 h-6" /> },
-    { number: '4.9/5', label: 'Calificación promedio', icon: <Star className="w-6 h-6" /> },
-    { number: '2,847', label: 'Opiniones verificadas', icon: <ThumbsUp className="w-6 h-6" /> },
-    { number: '97%', label: 'Recomiendan Fibra Coli', icon: <Heart className="w-6 h-6" /> },
-  ]
-
-  return (
-    <section className="bg-gradient-to-r from-emerald-600 to-emerald-500 py-10 px-4">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-white">Números que hablan por sí solos</h2>
-            <p className="text-emerald-100 text-sm mt-1">Miles de mujeres ya confiaron en Fibra Coli</p>
-          </div>
-        </RevealOnScroll>
-
-        <div className="grid grid-cols-2 gap-3">
-          {stats.map((s, i) => (
-            <RevealOnScroll key={i} delay={i * 0.1}>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center border border-white/20">
-                <div className="flex justify-center text-amber-300 mb-2">{s.icon}</div>
-                <p className="text-2xl font-extrabold text-white">{s.number}</p>
-                <p className="text-emerald-100 text-xs mt-0.5">{s.label}</p>
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── SECTION: GIFT (OBSEQUIO TERMOACTIVO) ─── */
-
-function GiftSection() {
-  return (
-    <section id="obsequio" className="bg-gradient-to-b from-amber-50 to-white py-12 px-4 scroll-mt-20">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-6">
-            <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full badge-pulse mb-3">
-              <Gift className="w-3.5 h-3.5" /> OBSEQUIO EXCLUSIVO
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              ¡Llévate un <span className="text-amber-600">obsequio GRATIS</span> con tu pedido!
-            </h2>
-            <p className="text-gray-600 mt-2">Con cada compra de Fibra Coli, recibes completamente gratis una <strong>Loción Termoactiva Allpa Natural</strong></p>
-          </div>
-        </RevealOnScroll>
-
-        <RevealOnScroll>
-          <div className="relative bg-white rounded-3xl p-5 shadow-xl border-2 border-amber-300 overflow-hidden">
-            {/* Decorative sparkles */}
-            <div className="absolute top-3 right-3 text-amber-400 sparkle"><Sparkles className="w-5 h-5" /></div>
-            <div className="absolute bottom-4 left-4 text-amber-400 sparkle" style={{ animationDelay: '0.5s' }}><Sparkles className="w-4 h-4" /></div>
-
-            {/* Badge */}
-            <div className="absolute top-0 right-0">
-              <div className="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl">
-                GRATIS
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-5">
-              {/* Gift - Real product photo */}
-              <div className="w-40 h-48 flex-shrink-0">
-                <img
-                  src="/images/locion-termoactiva.jpg"
-                  alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
-                  className="w-full h-full object-contain rounded-2xl"
-                />
-              </div>
-
-              <div className="text-center sm:text-left flex-1">
-                <h3 className="font-bold text-lg text-gray-900 mb-1">Loción Termoactiva Allpa Natural</h3>
-                <p className="text-xs text-amber-600 font-semibold mb-2">Fórmula Mejorada · 18 ml · Certificados Naturales</p>
-                <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                  Analgésico y antiinflamatorio natural de aplicación local. Con <strong>Árnica, Castaño de Indias, Caléndula, Hamamelis, Uña de Gato y Chuchuhuasi</strong>. Se absorbe rápido y alivia el dolor de forma inmediata.
-                </p>
-
-                {/* Uses */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {['Torceduras leves', 'Esguinces', 'Calambres', 'Tortícolis', 'Contracturas'].map((use, i) => (
-                    <span key={i} className="text-[10px] bg-amber-50 text-amber-700 font-medium px-2 py-0.5 rounded-full border border-amber-200">
-                      {use}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
-                  <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-xs font-semibold px-2 py-1 rounded-full">
-                    <Gift className="w-3 h-3" /> Valor: $29,900
-                  </span>
-                  <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-1 rounded-full">
-                    <CheckCircle2 className="w-3 h-3" /> GRATIS con cada pedido
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* How to use */}
-            <div className="mt-4 bg-gray-50 rounded-xl p-3 border border-gray-200">
-              <p className="text-xs font-bold text-gray-700 mb-2">📋 Modo de uso:</p>
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  { step: '1', text: 'Aplica el spray a 20 cm de la piel' },
-                  { step: '2', text: 'Pulveriza en posición vertical unos segundos' },
-                  { step: '3', text: 'Espera que se evapore sin frotar' },
-                  { step: '4', text: 'Lávate las manos después de cada aplicación' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-1.5">
-                    <span className="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{item.step}</span>
-                    <span className="text-[11px] text-gray-600 leading-tight">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[10px] text-gray-500 mt-2">Para adultos y adolescentes desde 12 años. Hasta 4 aplicaciones al día. Si no mejora en 7 días, consulta a tu médico.</p>
-            </div>
-
-            {/* Timer urgency */}
-            <div className="mt-4 bg-amber-50 rounded-xl p-3 text-center border border-amber-200">
-              <div className="flex items-center justify-center gap-2 text-amber-700">
-                <Timer className="w-4 h-4" />
-                <span className="text-sm font-semibold">¡Solo por esta semana! Quedan <span className="text-red-600 font-bold countdown-pulse">23 obsequios</span> disponibles</span>
-              </div>
-            </div>
-          </div>
-        </RevealOnScroll>
-
-        <RevealOnScroll>
-          <div className="mt-5 text-center">
-            <a
-              href="#oferta"
-              className="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-amber-200 pulse-cta"
-            >
-              ¡Quiero mi obsequio GRATIS! 🎁
-            </a>
-          </div>
-        </RevealOnScroll>
-      </div>
-    </section>
-  )
-}
-
-/* ─── GIFT REMINDER STRIP (reused throughout page) ─── */
-
-function GiftReminder() {
-  return (
-    <div className="bg-gradient-to-r from-amber-50 to-amber-100 border-y border-amber-200 py-2.5 px-4">
-      <div className="max-w-lg mx-auto flex items-center justify-center gap-2 text-sm">
-        <Gift className="w-4 h-4 text-amber-600 flex-shrink-0" />
-        <span className="text-amber-800 font-medium">
-          <strong>OBSEQUIO GRATIS:</strong> Loción Termoactiva con cada pedido <a href="#obsequio" className="text-amber-600 underline font-semibold">Ver más →</a>
-        </span>
-      </div>
-    </div>
-  )
-}
-
-/* ─── SECTION 11: PRICING / OFFER ─── */
-
-function OfferSection() {
-  const plans = [
-    {
-      qty: 1,
-      label: '1 Frasco',
-      price: 79, // simplified price in thousands
-      priceStr: '$79.900',
-      oldPrice: '$119.900',
-      savings: '33% OFF',
-      popular: false,
-      desc: 'Para probar Fibra Coli + Obsequio GRATIS',
-      perDay: '$2.663/día',
-    },
-    {
-      qty: 2,
-      label: '2 Frascos',
-      price: 139,
-      priceStr: '$139.900',
-      oldPrice: '$239.800',
-      savings: '42% OFF',
-      popular: true,
-      desc: 'El más elegido + Obsequio GRATIS',
-      perDay: '$2.332/día',
-    },
-    {
-      qty: 3,
-      label: '3 Frascos',
-      price: 189,
-      priceStr: '$189.900',
-      oldPrice: '$359.700',
-      savings: '47% OFF',
-      popular: false,
-      desc: 'Tratamiento completo + Obsequio GRATIS',
-      perDay: '$2.110/día',
-    },
-  ]
-
-  return (
-    <section id="oferta" className="bg-gradient-to-b from-white to-emerald-50/30 py-12 px-4 scroll-mt-20">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Oferta especial</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Elige tu plan y <span className="gradient-text">empieza hoy</span>
-            </h2>
-            <p className="text-gray-600 mt-2">Pago contra entrega · Solo pagas cuando recibes tu pedido</p>
-          </div>
-        </RevealOnScroll>
-
-        <div className="space-y-4">
-          {plans.map((plan, i) => (
-            <RevealOnScroll key={i} delay={i * 0.1}>
-              <div className={`relative bg-white rounded-2xl p-5 border-2 transition-all ${
-                plan.popular
-                  ? 'border-emerald-500 shadow-xl shadow-emerald-100'
-                  : 'border-gray-200 shadow-sm'
-              }`}>
-                {/* Popular badge */}
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-emerald-600 text-white text-xs font-bold px-4 py-1 rounded-full shadow-md">
-                      ⭐ MÁS ELEGIDO
-                    </span>
-                  </div>
-                )}
-
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900">{plan.label}</h3>
-                    <p className="text-xs text-gray-500">{plan.desc}</p>
-                  </div>
-                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2.5 py-1 rounded-full">
-                    {plan.savings}
-                  </span>
-                </div>
-
-                <div className="flex items-end gap-2 mb-1">
-                  <span className="text-3xl font-extrabold text-gray-900">{plan.priceStr}</span>
-                  <span className="price-strike text-base mb-1">{plan.oldPrice}</span>
-                </div>
-                <p className="text-xs text-emerald-600 font-semibold mb-3">Solo {plan.perDay} · Menos que un tinto ☕</p>
-
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5 mb-3 flex items-center gap-2">
-                  <Gift className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                  <p className="text-xs text-amber-700 font-semibold">+ Obsequio GRATIS: Loción Termoactiva Allpa</p>
-                </div>
-
-                <a
-                  href="https://wa.me/573001234567?text=Hola%2C%20quiero%20ordenar%20" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block w-full text-center font-bold text-base py-3.5 rounded-xl transition-all ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-200 pulse-cta'
-                      : 'bg-gray-900 text-white hover:bg-gray-800'
-                  }`}
-                >
-                  {plan.popular ? '¡Lo quiero con obsequio! →' : 'Ordenar ahora →'}
-                </a>
-
-                <div className="flex items-center justify-center gap-3 mt-2.5 text-[10px] text-gray-500">
-                  <span className="flex items-center gap-1"><Truck className="w-3 h-3" /> Envío gratis</span>
-                  <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Contra entrega</span>
-                  <span className="flex items-center gap-1"><Lock className="w-3 h-3" /> Compra segura</span>
-                </div>
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
-
-        {/* Social proof near CTA */}
-        <RevealOnScroll>
-          <div className="mt-5 flex items-center justify-center gap-4 text-sm text-gray-600">
-            <div className="flex -space-x-2">
-              {['MF', 'CE', 'SM', 'YP', 'AB'].map((initials, i) => (
-                <div key={i} className="w-7 h-7 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-[9px] font-bold">
-                  {initials}
-                </div>
-              ))}
-            </div>
-            <span>12,000+ clientas satisfechas</span>
-          </div>
-        </RevealOnScroll>
-      </div>
-    </section>
-  )
-}
-
-/* ─── SECTION 12: GUARANTEES ─── */
-
-function GuaranteesSection() {
-  const guarantees = [
-    { icon: <ShieldCheck className="w-8 h-8" />, title: 'Compra segura', desc: 'Tus datos están protegidos y tu compra es 100% confidencial.' },
-    { icon: <Lock className="w-8 h-8" />, title: 'Protección de datos', desc: 'No compartimos tu información personal con terceros.' },
-    { icon: <Phone className="w-8 h-8" />, title: 'Atención WhatsApp', desc: 'Escríbenos antes o después de comprar. Siempre estamos para ti.' },
-    { icon: <Package className="w-8 h-8" />, title: 'Pago contra entrega', desc: 'Solo pagas cuando tienes el producto en tus manos. Sin riesgo.' },
-  ]
-
-  return (
-    <section className="bg-white py-12 px-4">
-      <div className="max-w-lg mx-auto">
-        <RevealOnScroll>
-          <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Tu tranquilidad primero</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Compra con <span className="gradient-text">total confianza</span>
-            </h2>
-          </div>
-        </RevealOnScroll>
-
-        <div className="grid grid-cols-2 gap-3">
-          {guarantees.map((g, i) => (
-            <RevealOnScroll key={i} delay={i * 0.08}>
-              <div className="bg-gray-50 rounded-2xl p-4 text-center border border-gray-100">
-                <div className="flex justify-center text-emerald-600 mb-2">{g.icon}</div>
-                <h3 className="font-bold text-sm text-gray-900 mb-1">{g.title}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">{g.desc}</p>
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
-
-        <RevealOnScroll>
-          <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
-            <p className="text-emerald-700 text-sm font-medium">
-              🇨🇴 <strong>Empresa 100% colombiana</strong> · Más de 12,000 clientas confían en nosotros
-            </p>
-          </div>
-        </RevealOnScroll>
       </div>
     </section>
   )
@@ -1074,34 +867,30 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="bg-gray-50 py-12 px-4">
+    <section className="bg-gradient-to-b from-gray-50 to-white py-12 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-8">
-            <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide">Resolvemos tus dudas</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-              Preguntas <span className="gradient-text">frecuentes</span>
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Resolvemos tus dudas</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              PREGUNTAS <span className="text-emerald-700">FRECUENTES</span>
             </h2>
           </div>
         </RevealOnScroll>
 
         <div className="space-y-2">
           {FAQS.map((faq, i) => (
-            <RevealOnScroll key={i} delay={i * 0.03}>
-              <div
-                className={`faq-item bg-white rounded-xl border overflow-hidden ${
-                  openIndex === i ? 'border-emerald-300 shadow-sm' : 'border-gray-200'
-                }`}
-              >
+            <RevealOnScroll key={i} delay={i * 0.04}>
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full flex items-center justify-between p-4 text-left"
+                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-semibold text-sm text-gray-900 pr-3">{faq.q}</span>
+                  <span className="text-sm font-bold text-gray-900 pr-4">{faq.q}</span>
                   {openIndex === i ? (
-                    <ChevronUp className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
                   )}
                 </button>
                 <AnimatePresence>
@@ -1110,10 +899,13 @@ function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
                     >
-                      <div className="px-4 pb-4">
-                        <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
+                      <div className="px-4 pb-4 pt-0">
+                        <div className="bg-emerald-50/50 rounded-xl p-3">
+                          <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
+                        </div>
                       </div>
                     </motion.div>
                   )}
@@ -1122,69 +914,83 @@ function FAQSection() {
             </RevealOnScroll>
           ))}
         </div>
-
-        <RevealOnScroll>
-          <div className="mt-5 text-center">
-            <p className="text-sm text-gray-500 mb-2">¿Aún tienes dudas?</p>
-            <a
-              href="https://wa.me/573001234567?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20Fibra%20Coli"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold text-sm py-3 px-6 rounded-xl transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" /> Escríbenos por WhatsApp
-            </a>
-          </div>
-        </RevealOnScroll>
       </div>
     </section>
   )
 }
 
-/* ─── SECTION 14: FINAL CTA ─── */
+/* ─── SECTION 14: GIFT / OBSEQUIO ─── */
 
-function FinalCTASection() {
+function GiftSection() {
   return (
-    <section className="bg-gradient-to-b from-emerald-600 to-emerald-700 py-14 px-4">
-      <div className="max-w-lg mx-auto text-center">
+    <section className="bg-gradient-to-b from-amber-50 to-amber-100/50 py-12 px-4">
+      <div className="max-w-lg mx-auto">
         <RevealOnScroll>
-          <div className="mb-6">
-            <span className="text-emerald-200 text-sm font-semibold">No dejes para mañana tu bienestar</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mt-2 leading-tight">
-              Tu digestión puede mejorar. <br />
-              <span className="text-amber-300">Empieza hoy.</span>
-            </h2>
-            <p className="text-emerald-100 mt-3 leading-relaxed">
-              Miles de mujeres en Colombia ya recuperaron su bienestar digestivo. No sigas sufriendo en silencio. Fibra Coli fue creado para ti.
-            </p>
-          </div>
-        </RevealOnScroll>
-
-        <RevealOnScroll>
-          <div className="flex flex-col items-center gap-3">
-            <a
-              href="#oferta"
-              className="block w-full max-w-xs bg-white text-emerald-700 font-extrabold text-lg py-4 px-8 rounded-2xl shadow-xl hover:bg-emerald-50 transition-all pulse-cta"
-            >
-              ¡Quiero mi Fibra Coli! 🌿
-            </a>
-            <div className="flex flex-wrap items-center justify-center gap-3 text-emerald-200 text-xs">
-              <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Pago contra entrega</span>
-              <span className="flex items-center gap-1"><Truck className="w-3.5 h-3.5" /> Envío nacional</span>
-              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Compra segura</span>
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 bg-amber-400 text-amber-900 text-sm font-extrabold px-4 py-2 rounded-full mb-3 shadow-md">
+              <Gift className="w-5 h-5" />
+              OBSEQUIO ESPECIAL
             </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+              ¡Loción Termoactiva <span className="text-amber-600">GRATIS</span>!
+            </h2>
+            <p className="text-gray-600 mt-2 text-sm">Con cada pedido de ColiPlus, te llevas GRATIS una Loción Termoactiva Allpa Natural</p>
           </div>
         </RevealOnScroll>
 
+        {/* Gift product photo */}
         <RevealOnScroll>
-          <div className="mt-8 flex items-center justify-center gap-2">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-300 text-amber-300" />
+          <div className="bg-white rounded-2xl border-2 border-amber-300 overflow-hidden shadow-lg shadow-amber-200/50 mb-6">
+            <img
+              src="/images/locion-termoactiva.jpg"
+              alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
+              className="w-full object-contain max-h-80"
+            />
+          </div>
+        </RevealOnScroll>
+
+        {/* Gift details */}
+        <RevealOnScroll>
+          <div className="bg-white rounded-2xl p-5 border border-amber-200 shadow-sm mb-6">
+            <h3 className="font-extrabold text-gray-900 text-lg mb-2 text-center">Loción Termoactiva Allpa Natural</h3>
+            <div className="space-y-2">
+              {[
+                'Activación térmica que potencia la reducción de medidas',
+                'Fórmula natural con extractos botánicos',
+                'Ideal para complementar tu bienestar digestivo',
+                'Aplica en abdomen y zonas deseadas',
+              ].map((b, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-gray-600">{b}</span>
+                </div>
               ))}
             </div>
-            <span className="text-white text-sm font-semibold">4.9/5</span>
-            <span className="text-emerald-200 text-xs">(2,847 opiniones)</span>
+            <div className="mt-4 text-center bg-amber-50 rounded-xl p-3 border border-amber-200">
+              <p className="text-amber-700 font-bold text-sm">🎁 Valor: GRATIS con tu pedido de ColiPlus</p>
+              <p className="text-amber-600 text-xs mt-1">¡No te quedes sin la tuya! Stock limitado</p>
+            </div>
+          </div>
+        </RevealOnScroll>
+
+        {/* Loción pricing images */}
+        <RevealOnScroll>
+          <div className="space-y-3">
+            <img src="/images/locion-1unidad.png" alt="Loción Termoactiva 1 Unidad" className="w-full object-contain rounded-xl" />
+            <img src="/images/locion-2unidades.png" alt="Loción Termoactiva 2 Unidades" className="w-full object-contain rounded-xl" />
+            <img src="/images/locion-3unidades.png" alt="Loción Termoactiva 3 Unidades" className="w-full object-contain rounded-xl" />
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="mt-6 text-center">
+            <a
+              href="#oferta"
+              className="block w-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-amber-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-200 transition-all duration-200 pulse-cta"
+            >
+              🎁 ¡QUIERO MI OBSEQUIO GRATIS!
+            </a>
+            <p className="text-xs text-amber-700 mt-2">Solo pagas cuando recibes · Envío a toda Colombia</p>
           </div>
         </RevealOnScroll>
       </div>
@@ -1192,16 +998,46 @@ function FinalCTASection() {
   )
 }
 
-/* ─── STICKY CTA ─── */
+/* ─── SECTION: FINAL CTA ─── */
+
+function FinalCTA() {
+  return (
+    <section className="bg-gradient-to-b from-emerald-800 to-emerald-900 py-12 px-4">
+      <div className="max-w-lg mx-auto text-center">
+        <RevealOnScroll>
+          <Sparkles className="w-12 h-12 text-amber-300 mx-auto mb-3" />
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            Tu bienestar digestivo está a un clic
+          </h2>
+          <p className="text-emerald-100 mb-2">Más de 8,700 personas ya recuperaron su salud intestinal con ColiPlus</p>
+          <p className="text-amber-300 font-bold text-sm mb-6">🎁 + Loción Termoactiva GRATIS con tu pedido</p>
+          <a
+            href="#oferta"
+            className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-xl py-5 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
+          >
+            ¡ORDENAR COLIPLUS AHORA! 🌿
+          </a>
+          <div className="mt-3 flex items-center justify-center gap-4 text-emerald-200 text-xs">
+            <span className="flex items-center gap-1"><Truck className="w-3.5 h-3.5" /> Envío nacional</span>
+            <span className="flex items-center gap-1"><Shield className="w-3.5 h-3.5" /> Pago contra entrega</span>
+            <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> INVIMA</span>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  )
+}
+
+/* ─── STICKY CTA BAR ─── */
 
 function StickyCTA() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 300)
+      setVisible(window.scrollY > 600)
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -1213,18 +1049,18 @@ function StickyCTA() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="sticky-cta-bar bg-white/90 border-t border-gray-200 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]"
+          className="sticky-cta-bar bg-white/95 border-t border-emerald-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]"
         >
           <div className="max-w-lg mx-auto flex items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm text-gray-900 truncate">Fibra Coli</p>
-              <p className="text-xs text-gray-500">Desde $79.900 · <span className="text-amber-600">🎁 Obsequio</span> · Contra entrega</p>
+            <div className="flex-1">
+              <p className="text-xs font-bold text-gray-900">ColiPlus + Loción GRATIS</p>
+              <p className="text-[10px] text-gray-500">Pago contra entrega · Envío nacional</p>
             </div>
             <a
               href="#oferta"
-              className="flex-shrink-0 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-sm py-3 px-5 rounded-xl shadow-lg shadow-emerald-200 transition-all active:scale-95"
+              className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-extrabold text-sm py-3 px-5 rounded-xl shadow-md shadow-emerald-200 flex-shrink-0"
             >
-              ¡Comprar ahora!
+              ORDENAR YA 🌿
             </a>
           </div>
         </motion.div>
@@ -1237,72 +1073,51 @@ function StickyCTA() {
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 py-8 px-4">
+    <footer className="bg-emerald-900 py-6 px-4">
       <div className="max-w-lg mx-auto text-center">
-        <p className="text-gray-400 text-xs leading-relaxed">
-          Este producto es un suplemento alimenticio y no reemplaza una dieta balanceada ni el tratamiento médico. 
-          Los resultados pueden variar según cada persona. Consulta a tu médico si estás embarazada, en lactancia o bajo tratamiento médico.
+        <p className="text-emerald-200 text-xs">
+          ColiPlus · Fibra Prebiótica Natural para Bienestar Digestivo
         </p>
-        <div className="mt-4 flex items-center justify-center gap-4 text-gray-500 text-xs">
-          <span>© 2025 Fibra Coli Colombia</span>
-          <span>·</span>
-          <span>Todos los derechos reservados</span>
+        <p className="text-emerald-300/60 text-[10px] mt-1">
+          Registro INVIMA: NSA-0012423-2022
+        </p>
+        <p className="text-emerald-300/40 text-[10px] mt-1">
+          Este producto no reemplaza el tratamiento médico. Consulta a tu médico si tienes condiciones específicas.
+        </p>
+        <div className="mt-3 flex items-center justify-center gap-2">
+          <Lock className="w-3 h-3 text-emerald-400" />
+          <span className="text-[10px] text-emerald-300/50">Compra 100% segura</span>
         </div>
-        <p className="text-gray-600 text-[10px] mt-3">Producto comercializado en Colombia · Envío a todo el territorio nacional</p>
       </div>
     </footer>
   )
 }
 
-/* ─── MID-PAGE SOCIAL PROOF STRIPS ─── */
-
-function MiniSocialProof() {
-  return (
-    <div className="bg-emerald-50 border-y border-emerald-100 py-3 px-4">
-      <div className="max-w-lg mx-auto flex items-center justify-center gap-3 text-sm text-emerald-700">
-        <div className="flex -space-x-1.5">
-          {['M', 'C', 'S', 'Y'].map((l, i) => (
-            <div key={i} className="w-6 h-6 rounded-full bg-emerald-500 border border-white flex items-center justify-center text-white text-[8px] font-bold">
-              {l}
-            </div>
-          ))}
-        </div>
-        <span className="font-medium"><strong className="text-emerald-800">127 personas</strong> están viendo esta página ahora</span>
-      </div>
-    </div>
-  )
-}
-
 /* ─── MAIN PAGE ─── */
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <main className="flex-1">
-        <HeroSection />
-        <MiniSocialProof />
-        <GiftReminder />
-        <VideoSection />
-        <PainPointsSection />
-        <ProductPresentation />
-        <MiniSocialProof />
-        <GiftReminder />
-        <BenefitsSection />
-        <HowItWorksSection />
-        <IngredientsSection />
-        <BeforeAfterSection />
-        <MiniSocialProof />
-        <GiftReminder />
-        <TestimonialsSection />
-        <SocialProofSection />
-        <GiftSection />
-        <OfferSection />
-        <GuaranteesSection />
-        <FAQSection />
-        <FinalCTASection />
-      </main>
+    <main className="min-h-screen flex flex-col bg-white">
+      <HeroSection />
+      <GiftReminder />
+      <TestimonialCarousel />
+      <WhyChooseSection />
+      <GiftReminder />
+      <IngredientsSection />
+      <HowToConsumeSection />
+      <PricingSection />
+      <DidYouKnowSection />
+      <GiftReminder />
+      <BenefitsChecklist />
+      <InvimaSection />
+      <WhyEffectiveSection />
+      <BestOptionSection />
+      <MoreTestimonialsSection />
+      <FAQSection />
+      <GiftSection />
+      <FinalCTA />
       <Footer />
       <StickyCTA />
-    </div>
+    </main>
   )
 }

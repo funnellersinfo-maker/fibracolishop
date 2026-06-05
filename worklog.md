@@ -69,3 +69,43 @@ Stage Summary:
 - Sticky CTA mentions the gift
 - All pricing plans show gift included
 - No uploaded photos used in gift section - CSS-drawn bottle instead
+
+---
+Task ID: 3
+Agent: Main Agent + Full-stack Agent
+Task: Replicate Adara Belleza ColiPlus page design - complete rebuild
+
+Work Log:
+- Scraped Adara Belleza product page content using web-reader skill
+- Extracted: product info, ingredients, testimonials, pricing, FAQ, INVIMA data
+- Downloaded 9 key product images from Shopify CDN (coliplus hero, 1/2/3 unit pricing, locion pricing, sellos, pagos)
+- Completely rebuilt page.tsx replicating Adara's design style:
+  - Dark emerald hero with coliplus-hero.jpg product image
+  - "+8,700 Usuarios" badge
+  - Auto-rotating testimonial carousel with tags
+  - "¿POR QUÉ ELEGIRLO?" with INVIMA registration
+  - 10 ingredients section (Linaza, Pitaya, Flor de Jamaica, Fibra Prebiótica, Alcachofa, Chía, Espirulina, Noni, Té Verde, Manzana)
+  - "¿CÓMO CONSUMIRLO?" with SÍ PUEDEN/NO PUEDEN cards
+  - Pricing with actual product bundle images (coliplus-1unidad.png, etc.)
+  - "¿Sabías que...?" colon health problem section
+  - 12-item benefits checklist
+  - INVIMA certification section with sellos image
+  - Ingredient science deep-dive section
+  - ColiPlus vs Otras Fibras comparison table
+  - Expandable testimonials (6 shown, 20 total)
+  - FAQ with animated accordion
+  - Gift section with real locion-termoactiva.jpg photo + locion pricing images
+  - 3 amber GiftReminder strips throughout
+  - Sticky CTA with gift mention
+  - Dark emerald final CTA
+- All lint checks pass
+- Verified with Agent Browser: all sections present, all images loading, no errors
+
+Stage Summary:
+- Complete page rebuild matching Adara Belleza style
+- Dark emerald premium design
+- Real product pricing images from Adara's Shopify
+- 10 ingredients (not just 6 like before)
+- INVIMA prominently displayed
+- Gift section uses real Termoactiva photo
+- All functional, zero errors
