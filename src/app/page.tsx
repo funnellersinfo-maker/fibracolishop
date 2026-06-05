@@ -796,24 +796,13 @@ function GiftSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-5">
-              {/* Gift visual representation */}
-              <div className="w-36 h-44 flex-shrink-0">
-                <div className="w-full h-full bg-gradient-to-b from-amber-100 to-amber-50 rounded-2xl flex flex-col items-center justify-center border border-amber-200 p-3">
-                  {/* Bottle illustration */}
-                  <div className="w-14 h-24 bg-amber-800 rounded-lg relative overflow-hidden">
-                    <div className="absolute inset-x-0 top-0 h-4 bg-amber-900 rounded-t-lg" />
-                    <div className="absolute inset-x-1 top-4 bottom-1 bg-amber-700 rounded-sm" />
-                    <div className="absolute inset-x-0 bottom-0 h-3 bg-amber-600" />
-                    {/* Label */}
-                    <div className="absolute inset-x-2 top-6 bottom-4 bg-white/90 rounded-sm flex flex-col items-center justify-center px-0.5">
-                      <span className="text-[5px] font-bold text-amber-800 leading-none">ALLPA</span>
-                      <span className="text-[3.5px] text-red-600 font-bold leading-none mt-0.5">TERMOACTIVA</span>
-                      <span className="text-[3px] text-amber-700 leading-none mt-0.5">18 ml</span>
-                    </div>
-                  </div>
-                  {/* Spray cap */}
-                  <div className="w-6 h-3 bg-gray-300 rounded-t-md -mt-0.5" />
-                </div>
+              {/* Gift - Real product photo */}
+              <div className="w-40 h-48 flex-shrink-0">
+                <img
+                  src="/images/locion-termoactiva.jpg"
+                  alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
+                  className="w-full h-full object-contain rounded-2xl"
+                />
               </div>
 
               <div className="text-center sm:text-left flex-1">
