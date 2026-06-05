@@ -90,12 +90,15 @@ function HeroSection() {
 
       <div className="relative max-w-lg mx-auto px-4 pt-8 pb-6">
         {/* Trust badge */}
-        <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
           <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1.5 rounded-full">
             <ShieldCheck className="w-3.5 h-3.5" /> Pago contra entrega
           </span>
           <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1.5 rounded-full">
             <Truck className="w-3.5 h-3.5" /> Envío nacional
+          </span>
+          <span className="inline-flex items-center gap-1 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1.5 rounded-full badge-pulse">
+            <Gift className="w-3.5 h-3.5" /> Obsequio GRATIS
           </span>
         </div>
 
@@ -153,7 +156,7 @@ function HeroSection() {
         >
           ¡Quiero mi Fibra Coli! 🌿
         </a>
-        <p className="text-center text-xs text-gray-500 mt-2">Solo pagas cuando lo recibes · Envío a toda Colombia</p>
+        <p className="text-center text-xs text-gray-500 mt-2">Solo pagas cuando lo recibes · Envío a toda Colombia · <span className="text-amber-600 font-medium">🎁 Obsequio incluido</span></p>
       </div>
     </section>
   )
@@ -765,7 +768,7 @@ function SocialProofSection() {
 
 function GiftSection() {
   return (
-    <section className="bg-gradient-to-b from-amber-50 to-white py-12 px-4">
+    <section id="obsequio" className="bg-gradient-to-b from-amber-50 to-white py-12 px-4 scroll-mt-20">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-6">
@@ -773,9 +776,9 @@ function GiftSection() {
               <Gift className="w-3.5 h-3.5" /> OBSEQUIO EXCLUSIVO
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              ¡Llévate un <span className="text-amber-600">obsequio GRATIS</span>!
+              ¡Llévate un <span className="text-amber-600">obsequio GRATIS</span> con tu pedido!
             </h2>
-            <p className="text-gray-600 mt-2">Solo por esta semana con tu compra de 2 o más frascos</p>
+            <p className="text-gray-600 mt-2">Con cada compra de Fibra Coli, recibes completamente gratis una <strong>Loción Termoactiva Allpa Natural</strong></p>
           </div>
         </RevealOnScroll>
 
@@ -786,43 +789,84 @@ function GiftSection() {
             <div className="absolute bottom-4 left-4 text-amber-400 sparkle" style={{ animationDelay: '0.5s' }}><Sparkles className="w-4 h-4" /></div>
 
             {/* Badge */}
-            <div className="absolute -top-0 -right-0">
+            <div className="absolute top-0 right-0">
               <div className="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl">
                 GRATIS
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-5">
-              {/* Gift image */}
-              <div className="w-36 h-36 flex-shrink-0">
-                <img
-                  src="/images/product-gift.jpg"
-                  alt="Obsequio termoactivo - Frasco pequeño Fibra Coli"
-                  className="w-full h-full object-cover rounded-2xl"
-                />
+              {/* Gift visual representation */}
+              <div className="w-36 h-44 flex-shrink-0">
+                <div className="w-full h-full bg-gradient-to-b from-amber-100 to-amber-50 rounded-2xl flex flex-col items-center justify-center border border-amber-200 p-3">
+                  {/* Bottle illustration */}
+                  <div className="w-14 h-24 bg-amber-800 rounded-lg relative overflow-hidden">
+                    <div className="absolute inset-x-0 top-0 h-4 bg-amber-900 rounded-t-lg" />
+                    <div className="absolute inset-x-1 top-4 bottom-1 bg-amber-700 rounded-sm" />
+                    <div className="absolute inset-x-0 bottom-0 h-3 bg-amber-600" />
+                    {/* Label */}
+                    <div className="absolute inset-x-2 top-6 bottom-4 bg-white/90 rounded-sm flex flex-col items-center justify-center px-0.5">
+                      <span className="text-[5px] font-bold text-amber-800 leading-none">ALLPA</span>
+                      <span className="text-[3.5px] text-red-600 font-bold leading-none mt-0.5">TERMOACTIVA</span>
+                      <span className="text-[3px] text-amber-700 leading-none mt-0.5">18 ml</span>
+                    </div>
+                  </div>
+                  {/* Spray cap */}
+                  <div className="w-6 h-3 bg-gray-300 rounded-t-md -mt-0.5" />
+                </div>
               </div>
 
-              <div className="text-center sm:text-left">
-                <h3 className="font-bold text-lg text-gray-900 mb-1">Frasco Termoactivo Pequeño</h3>
+              <div className="text-center sm:text-left flex-1">
+                <h3 className="font-bold text-lg text-gray-900 mb-1">Loción Termoactiva Allpa Natural</h3>
+                <p className="text-xs text-amber-600 font-semibold mb-2">Fórmula Mejorada · 18 ml · Certificados Naturales</p>
                 <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                  Perfecto para llevar tu Fibra Coli a donde vayas. Mantiene tu bebida en la temperatura ideal. Práctico, elegante y tuyo <strong>totalmente gratis</strong>.
+                  Analgésico y antiinflamatorio natural de aplicación local. Con <strong>Árnica, Castaño de Indias, Caléndula, Hamamelis, Uña de Gato y Chuchuhuasi</strong>. Se absorbe rápido y alivia el dolor de forma inmediata.
                 </p>
+
+                {/* Uses */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {['Torceduras leves', 'Esguinces', 'Calambres', 'Tortícolis', 'Contracturas'].map((use, i) => (
+                    <span key={i} className="text-[10px] bg-amber-50 text-amber-700 font-medium px-2 py-0.5 rounded-full border border-amber-200">
+                      {use}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                   <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-xs font-semibold px-2 py-1 rounded-full">
                     <Gift className="w-3 h-3" /> Valor: $29,900
                   </span>
                   <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-1 rounded-full">
-                    <CheckCircle2 className="w-3 h-3" /> GRATIS con 2+ frascos
+                    <CheckCircle2 className="w-3 h-3" /> GRATIS con cada pedido
                   </span>
                 </div>
               </div>
+            </div>
+
+            {/* How to use */}
+            <div className="mt-4 bg-gray-50 rounded-xl p-3 border border-gray-200">
+              <p className="text-xs font-bold text-gray-700 mb-2">📋 Modo de uso:</p>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { step: '1', text: 'Aplica el spray a 20 cm de la piel' },
+                  { step: '2', text: 'Pulveriza en posición vertical unos segundos' },
+                  { step: '3', text: 'Espera que se evapore sin frotar' },
+                  { step: '4', text: 'Lávate las manos después de cada aplicación' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-1.5">
+                    <span className="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{item.step}</span>
+                    <span className="text-[11px] text-gray-600 leading-tight">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px] text-gray-500 mt-2">Para adultos y adolescentes desde 12 años. Hasta 4 aplicaciones al día. Si no mejora en 7 días, consulta a tu médico.</p>
             </div>
 
             {/* Timer urgency */}
             <div className="mt-4 bg-amber-50 rounded-xl p-3 text-center border border-amber-200">
               <div className="flex items-center justify-center gap-2 text-amber-700">
                 <Timer className="w-4 h-4" />
-                <span className="text-sm font-semibold">¡Oferta por tiempo limitado! Solo quedan <span className="text-red-600 font-bold countdown-pulse">23 obsequios</span> disponibles</span>
+                <span className="text-sm font-semibold">¡Solo por esta semana! Quedan <span className="text-red-600 font-bold countdown-pulse">23 obsequios</span> disponibles</span>
               </div>
             </div>
           </div>
@@ -843,6 +887,21 @@ function GiftSection() {
   )
 }
 
+/* ─── GIFT REMINDER STRIP (reused throughout page) ─── */
+
+function GiftReminder() {
+  return (
+    <div className="bg-gradient-to-r from-amber-50 to-amber-100 border-y border-amber-200 py-2.5 px-4">
+      <div className="max-w-lg mx-auto flex items-center justify-center gap-2 text-sm">
+        <Gift className="w-4 h-4 text-amber-600 flex-shrink-0" />
+        <span className="text-amber-800 font-medium">
+          <strong>OBSEQUIO GRATIS:</strong> Loción Termoactiva con cada pedido <a href="#obsequio" className="text-amber-600 underline font-semibold">Ver más →</a>
+        </span>
+      </div>
+    </div>
+  )
+}
+
 /* ─── SECTION 11: PRICING / OFFER ─── */
 
 function OfferSection() {
@@ -855,7 +914,7 @@ function OfferSection() {
       oldPrice: '$119.900',
       savings: '33% OFF',
       popular: false,
-      desc: 'Para probar Fibra Coli',
+      desc: 'Para probar Fibra Coli + Obsequio GRATIS',
       perDay: '$2.663/día',
     },
     {
@@ -866,9 +925,8 @@ function OfferSection() {
       oldPrice: '$239.800',
       savings: '42% OFF',
       popular: true,
-      desc: 'El más elegido + OBSEQUIO GRATIS',
+      desc: 'El más elegido + Obsequio GRATIS',
       perDay: '$2.332/día',
-      gift: true,
     },
     {
       qty: 3,
@@ -878,9 +936,8 @@ function OfferSection() {
       oldPrice: '$359.700',
       savings: '47% OFF',
       popular: false,
-      desc: 'Tratamiento completo + OBSEQUIO GRATIS',
+      desc: 'Tratamiento completo + Obsequio GRATIS',
       perDay: '$2.110/día',
-      gift: true,
     },
   ]
 
@@ -930,12 +987,10 @@ function OfferSection() {
                 </div>
                 <p className="text-xs text-emerald-600 font-semibold mb-3">Solo {plan.perDay} · Menos que un tinto ☕</p>
 
-                {plan.gift && (
-                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5 mb-3 flex items-center gap-2">
-                    <Gift className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                    <p className="text-xs text-amber-700 font-semibold">+ Obsequio GRATIS: Frasco Termoactivo</p>
-                  </div>
-                )}
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-2.5 mb-3 flex items-center gap-2">
+                  <Gift className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                  <p className="text-xs text-amber-700 font-semibold">+ Obsequio GRATIS: Loción Termoactiva Allpa</p>
+                </div>
 
                 <a
                   href="https://wa.me/573001234567?text=Hola%2C%20quiero%20ordenar%20" 
@@ -947,7 +1002,7 @@ function OfferSection() {
                       : 'bg-gray-900 text-white hover:bg-gray-800'
                   }`}
                 >
-                  {plan.popular ? '¡Lo quiero con obsequio! →' : 'Ordenar ahora'}
+                  {plan.popular ? '¡Lo quiero con obsequio! →' : 'Ordenar ahora →'}
                 </a>
 
                 <div className="flex items-center justify-center gap-3 mt-2.5 text-[10px] text-gray-500">
@@ -1174,7 +1229,7 @@ function StickyCTA() {
           <div className="max-w-lg mx-auto flex items-center gap-3">
             <div className="flex-1 min-w-0">
               <p className="font-bold text-sm text-gray-900 truncate">Fibra Coli</p>
-              <p className="text-xs text-gray-500">Desde $79.900 · Contra entrega</p>
+              <p className="text-xs text-gray-500">Desde $79.900 · <span className="text-amber-600">🎁 Obsequio</span> · Contra entrega</p>
             </div>
             <a
               href="#oferta"
@@ -1237,15 +1292,18 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <MiniSocialProof />
+        <GiftReminder />
         <VideoSection />
         <PainPointsSection />
         <ProductPresentation />
         <MiniSocialProof />
+        <GiftReminder />
         <BenefitsSection />
         <HowItWorksSection />
         <IngredientsSection />
         <BeforeAfterSection />
         <MiniSocialProof />
+        <GiftReminder />
         <TestimonialsSection />
         <SocialProofSection />
         <GiftSection />

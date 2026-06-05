@@ -37,3 +37,35 @@ Stage Summary:
 - Mobile-first responsive design
 - Zero runtime errors, clean lint
 - Footer properly structured with min-h-screen flex layout
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Fix obsequio section - use real Termoactiva info, gift with every order, add reminders throughout page
+
+Work Log:
+- Analyzed 3 uploaded images with VLM to extract Termoactiva product info
+- Extracted: Loción Termoactiva Allpa Natural, 18ml, Fórmula Mejorada
+- Ingredients: Árnica, Castaño de Indias, Caléndula, Hamamelis, Uña de Gato, Chuchuhuasi
+- Uses: Torceduras leves, Esguinces, Calambres, Tortícolis, Contracturas musculares
+- Mode of use: Apply spray at 20cm, vertical position, don't rub, wash hands after
+- Rewrote GiftSection with correct product info, CSS-drawn bottle illustration (no actual photos)
+- Changed condition from "GRATIS con 2+ frascos" to "GRATIS con cada pedido"
+- Added "Modo de uso" section with 4 steps inside gift card
+- Added uses tags (Torceduras, Esguinces, Calambres, Tortícolis, Contracturas)
+- Created GiftReminder component - amber strip that appears 3 times between sections
+- Added red "Obsequio GRATIS" badge in hero section
+- Updated hero CTA subtext to mention "🎁 Obsequio incluido"
+- Updated all 3 pricing plans to show gift line (was only on 2+ plans before)
+- Updated sticky CTA bar to mention "🎁 Obsequio"
+- Removed gift: true conditional from pricing plans - gift shows on ALL plans now
+- Clean lint, zero errors, verified with Agent Browser
+
+Stage Summary:
+- Gift section now shows correct Loción Termoactiva Allpa Natural info
+- Gift is included with EVERY order (not just 2+ frascos)
+- 3 GiftReminder strips throughout the page
+- Hero section badge + CTA subtext mention the gift
+- Sticky CTA mentions the gift
+- All pricing plans show gift included
+- No uploaded photos used in gift section - CSS-drawn bottle instead
