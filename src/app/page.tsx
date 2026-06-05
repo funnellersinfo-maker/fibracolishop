@@ -131,7 +131,7 @@ function GiftReminder() {
 
 const HERO_IMAGES = [
   { src: '/images/coliplus-hero.jpg', alt: 'ColiPlus - Fibra Prebiótica Natural para Bienestar Digestivo' },
-  { src: '/images/product-secondary.jpg', alt: 'ColiPlus - Vista del producto y sus beneficios' },
+  { src: '/images/coliplus-hero-2.png', alt: 'ColiPlus - Beneficios y resultados reales' },
 ]
 
 function HeroSection() {
