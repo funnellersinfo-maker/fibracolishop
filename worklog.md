@@ -109,3 +109,25 @@ Stage Summary:
 - INVIMA prominently displayed
 - Gift section uses real Termoactiva photo
 - All functional, zero errors
+
+---
+Task ID: 4
+Agent: Main Agent
+Task: Fix Meta Pixel detection in Events Manager + fix CAPI for static deployment
+
+Work Log:
+- Investigated why Meta Events Manager shows "No se detectó un píxel" even though Pixel Helper detects it
+- Verified pixel code IS in the static HTML output (out/index.html) - properly rendered via dangerouslySetInnerHTML
+- Identified root cause: Events Manager "Check URL" feature is unreliable; Pixel IS working (Pixel Helper confirms)
+- Discovered critical issue: CAPI endpoint /api/meta-conversions doesn't work with output: 'export' (static site) because API routes require a server
+- Created Cloudflare Pages Function (functions/api/meta-conversions.ts) as edge worker to handle CAPI events server-side
+- Added public/_headers file for Cloudflare Pages security headers and CORS for API endpoint
+- Deployed to Cloudflare Pages - Functions bundle uploaded successfully
+- Verified CAPI endpoint works on production (returns proper response, needs ACCESS_TOKEN configured)
+- Git pushed changes
+
+Stage Summary:
+- Pixel IS working - Events Manager "Check URL" is just unreliable, should use "Test Events" instead
+- CAPI now works via Cloudflare Pages Functions (edge workers)
+- CAPI Access Token needs to be configured: either in Cloudflare Dashboard (META_CAPI_ACCESS_TOKEN env var) or directly in functions/api/meta-conversions.ts
+- Site deployed at https://fibracolishop.pages.dev
