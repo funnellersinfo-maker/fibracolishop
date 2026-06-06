@@ -288,7 +288,7 @@ const TESTIMONIAL_PHOTOS = [
 function TestimonialPhotos({ indices }: { indices: number[] }) {
   return (
     <div className="bg-gradient-to-b from-emerald-50 to-white py-6 px-4">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-center gap-1.5 mb-4">
           <span className="text-emerald-700 font-extrabold text-xs uppercase tracking-wider">Resultados reales</span>
           <span className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">100% VERIFICADO</span>
@@ -316,7 +316,7 @@ function TestimonialPhotos({ indices }: { indices: number[] }) {
 function SocialProofBlock({ src, alt, label }: { src: string; alt: string; label: string }) {
   return (
     <div className="bg-white py-6 px-4">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-3xl mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-3">
             <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full">
@@ -695,7 +695,7 @@ function IngredientsSection() {
 function NutritionalInfoSection() {
   return (
     <section className="bg-gradient-to-b from-white to-emerald-50 py-10 px-4">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-3xl mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-6">
             <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Transparencia total</span>
@@ -913,7 +913,7 @@ function PricingSection() {
                 )}
                 <div className="p-5">
                   {/* Product bottles */}
-                  <div className="flex items-end justify-center gap-1.5 mb-3" style={{ minHeight: '80px' }}>
+                  <div className="flex items-end justify-center gap-2 mb-3" style={{ minHeight: '140px' }}>
                     {[...Array(plan.qty)].map((_, j) => (
                       <img
                         key={j}
@@ -921,8 +921,8 @@ function PricingSection() {
                         alt={`ColiPlus frasco ${j + 1}`}
                         className="object-contain"
                         style={{
-                          width: plan.qty === 1 ? '70px' : plan.qty === 2 ? '55px' : plan.qty === 3 ? '48px' : '40px',
-                          height: plan.qty === 1 ? '80px' : plan.qty === 2 ? '65px' : plan.qty === 3 ? '58px' : '50px',
+                          width: plan.qty === 1 ? '120px' : plan.qty === 2 ? '90px' : plan.qty === 3 ? '75px' : '60px',
+                          height: plan.qty === 1 ? '140px' : plan.qty === 2 ? '105px' : plan.qty === 3 ? '88px' : '72px',
                         }}
                       />
                     ))}
@@ -1134,7 +1134,7 @@ function InvimaSection() {
               </p>
             </div>
             <div className="mt-4 flex items-center justify-center gap-4">
-              <img src="/images/sellos-adara.png" alt="Certificaciones y sellos" className="max-h-24 object-contain opacity-90" />
+              <img src="/images/sellos-adara.png" alt="Certificaciones y sellos" className="max-h-48 sm:max-h-64 object-contain" />
             </div>
             <p className="text-emerald-200 text-xs mt-3">Compra con confianza. Producto 100% original y certificado.</p>
           </div>
@@ -1402,7 +1402,7 @@ function FAQSection() {
 function GiftSection() {
   return (
     <section className="bg-gradient-to-b from-amber-50 to-amber-100/50 py-12 px-4">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-3xl mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-6">
             <div className="inline-flex items-center gap-2 bg-amber-400 text-amber-900 text-sm font-extrabold px-4 py-2 rounded-full mb-3 shadow-md">
@@ -1418,7 +1418,7 @@ function GiftSection() {
 
         {/* Gift product photo on yellow background */}
         <RevealOnScroll>
-          <div className="bg-gradient-to-br from-amber-400 to-amber-300 rounded-2xl overflow-hidden shadow-lg shadow-amber-200/50 mb-6 p-6">
+          <div className="bg-gradient-to-br from-amber-400 to-amber-300 rounded-2xl overflow-hidden shadow-lg shadow-amber-200/50 mb-6 p-2">
             <img
               src="/images/locion-termoactiva.jpg"
               alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
