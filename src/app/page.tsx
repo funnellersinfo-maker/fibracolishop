@@ -1321,6 +1321,7 @@ export default function HomePage() {
       <GiftReminder />
       <IngredientsSection />
       <HowToConsumeSection />
+      <PricingSection />
       <DidYouKnowSection />
       <GiftReminder />
       <BenefitsChecklist />
@@ -1329,6 +1330,7 @@ export default function HomePage() {
       <BestOptionSection />
       <MoreTestimonialsSection />
       <FAQSection />
+      <PricingSection />
       <GiftSection />
       <FinalCTA />
       <Footer />
