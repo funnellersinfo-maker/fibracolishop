@@ -214,7 +214,7 @@ function HeroSection() {
                 key={activeSlide}
                 src={HERO_IMAGES[activeSlide].src}
                 alt={HERO_IMAGES[activeSlide].alt}
-                className="w-full h-full object-contain product-glow float-animation"
+                className="w-full h-full object-contain product-glow"
                 initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -60 }}
@@ -287,7 +287,9 @@ function HeroSection() {
 
         {/* CTA */}
         <a
-          href="#oferta"
+          href="https://wa.me/573214487903?text=Hola%2C%20quiero%20ordenar%20ColiPlus%20ahora%20mismo%20%F0%9F%8C%BF"
+          target="_blank"
+          rel="noopener noreferrer"
           className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
         >
           ¡QUIERO MI COLIPLUS AHORA! 🌿
@@ -563,6 +565,57 @@ function HowToConsumeSection() {
 
 /* ─── SECTION 6: PRICING / OFERTA ─── */
 
+const PRICING_PLANS = [
+  {
+    id: 1,
+    qty: 1,
+    label: '1 Unidad',
+    price: 75900,
+    priceDisplay: '$75.900',
+    perUnit: '$75.900 c/u',
+    badge: null,
+    border: 'border-gray-200 hover:border-emerald-300',
+    btn: 'bg-emerald-600 hover:bg-emerald-700 text-white',
+    waText: 'Hola, quiero ordenar 1 unidad de ColiPlus por $75.900. Pago contra entrega.',
+  },
+  {
+    id: 2,
+    qty: 2,
+    label: '2 Unidades',
+    price: 113850,
+    priceDisplay: '$113.850',
+    perUnit: '$56.925 c/u',
+    badge: '🔥 MÁS POPULAR',
+    border: 'border-amber-300 hover:border-amber-400',
+    btn: 'bg-amber-500 hover:bg-amber-600 text-amber-900',
+    waText: 'Hola, quiero ordenar 2 unidades de ColiPlus por $113.850. Pago contra entrega.',
+  },
+  {
+    id: 3,
+    qty: 3,
+    label: 'Paga 2 Lleva 3',
+    price: 151800,
+    priceDisplay: '$151.800',
+    perUnit: '$50.600 c/u',
+    badge: '🏆 MEJOR VALOR',
+    border: 'border-emerald-400 hover:border-emerald-500',
+    btn: 'bg-emerald-600 hover:bg-emerald-700 text-white',
+    waText: 'Hola, quiero la promo Paga 2 Lleva 3 de ColiPlus por $151.800. Pago contra entrega.',
+  },
+  {
+    id: 4,
+    qty: 5,
+    label: 'Paga 3 Lleva 5',
+    price: 227700,
+    priceDisplay: '$227.700',
+    perUnit: '$45.540 c/u',
+    badge: '💥 MÁXIMO AHORRO',
+    border: 'border-rose-400 hover:border-rose-500',
+    btn: 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white',
+    waText: 'Hola, quiero la promo Paga 3 Lleva 5 de ColiPlus por $227.700. Pago contra entrega.',
+  },
+]
+
 function PricingSection() {
   return (
     <section id="oferta" className="bg-gradient-to-b from-emerald-50 to-white py-12 px-4">
@@ -578,44 +631,69 @@ function PricingSection() {
         </RevealOnScroll>
 
         <div className="space-y-4">
-          {/* 1 unidad */}
-          <RevealOnScroll>
-            <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-emerald-300 transition-colors">
-              <img src="/images/coliplus-1unidad.png" alt="ColiPlus 1 Unidad - $75,900" className="w-full object-contain" />
-            </div>
-          </RevealOnScroll>
+          {PRICING_PLANS.map((plan, i) => (
+            <RevealOnScroll key={plan.id} delay={i * 0.08}>
+              <div className={`bg-white rounded-2xl border-2 ${plan.border} overflow-hidden relative transition-colors`}>
+                {plan.badge && (
+                  <div className="absolute top-3 right-3 bg-amber-400 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full z-10 shadow-md">
+                    {plan.badge}
+                  </div>
+                )}
+                <div className="p-5">
+                  {/* Product icon */}
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    {[...Array(Math.min(plan.qty, 3))].map((_, j) => (
+                      <div key={j} className="w-10 h-14 bg-gradient-to-b from-emerald-400 to-emerald-600 rounded-lg shadow-sm flex items-center justify-center">
+                        <Leaf className="w-5 h-5 text-white" />
+                      </div>
+                    ))}
+                    {plan.qty > 3 && (
+                      <span className="text-emerald-600 font-extrabold text-xl">+{plan.qty - 3}</span>
+                    )}
+                  </div>
 
-          {/* 2 unidades */}
-          <RevealOnScroll delay={0.1}>
-            <div className="bg-white rounded-2xl border-2 border-amber-300 overflow-hidden relative hover:border-amber-400 transition-colors">
-              <div className="absolute top-3 right-3 bg-amber-400 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full z-10 shadow-md">
-                🔥 MÁS POPULAR
-              </div>
-              <img src="/images/coliplus-2unidades.png" alt="ColiPlus 2 Unidades Promo" className="w-full object-contain" />
-            </div>
-          </RevealOnScroll>
+                  {/* Plan name */}
+                  <h3 className="font-extrabold text-gray-900 text-xl text-center">{plan.label}</h3>
 
-          {/* 3 unidades */}
-          <RevealOnScroll delay={0.2}>
-            <div className="bg-white rounded-2xl border-2 border-emerald-400 overflow-hidden relative hover:border-emerald-500 transition-colors">
-              <div className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-extrabold px-3 py-1 rounded-full z-10 shadow-md">
-                🏆 MEJOR VALOR
+                  {/* Price */}
+                  <div className="text-center mt-2">
+                    <p className="text-3xl font-extrabold text-emerald-700">{plan.priceDisplay}</p>
+                    <p className="text-sm text-gray-500">{plan.perUnit}</p>
+                  </div>
+
+                  {/* Savings badge */}
+                  {plan.qty > 1 && (
+                    <div className="mt-2 text-center">
+                      <span className="inline-block bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">
+                        Ahorra {Math.round((1 - plan.price / (plan.qty * 75900)) * 100)}% vs unidad
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Gift reminder */}
+                  <div className="mt-3 text-center">
+                    <span className="text-amber-600 text-xs font-bold">🎁 + Loción Termoactiva GRATIS</span>
+                  </div>
+
+                  {/* WhatsApp CTA */}
+                  <a
+                    href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waText)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block w-full text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg mt-4 transition-all duration-200 pulse-cta ${plan.btn}`}
+                  >
+                    🛒 ORDENAR AHORA
+                  </a>
+                  <PaymentStrip />
+                </div>
               </div>
-              <img src="/images/coliplus-3unidades.png" alt="ColiPlus 3 Unidades - Pague 2 Lleve 3" className="w-full object-contain" />
-            </div>
-          </RevealOnScroll>
+            </RevealOnScroll>
+          ))}
         </div>
 
         <RevealOnScroll>
           <div className="mt-6 text-center">
-            <a
-              href="#oferta"
-              className="block w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-emerald-200 transition-all duration-200 pulse-cta"
-            >
-              🛒 ¡ORDENAR AHORA! Pago contra entrega
-            </a>
-            <PaymentStrip />
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-gray-500">
               <Lock className="w-3 h-3 inline mr-1" />
               Compra segura · <span className="text-amber-600 font-semibold">🎁 Loción GRATIS incluida</span>
             </p>
@@ -657,7 +735,9 @@ function DidYouKnowSection() {
             <p className="font-bold text-base mb-2">¡No esperes a que sea demasiado tarde!</p>
             <p className="text-rose-100 text-sm mb-4">Tu cuerpo necesita fibra prebiótica para mantener el colon limpio y funcionando correctamente.</p>
             <a
-              href="#oferta"
+              href="https://wa.me/573214487903?text=Hola%2C%20quiero%20limpiar%20mi%20colon%20con%20ColiPlus%20YA"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-white text-rose-600 font-extrabold text-base py-3 px-8 rounded-2xl shadow-lg transition-all hover:bg-rose-50"
             >
               Quiero limpiar mi colon YA →
@@ -714,7 +794,9 @@ function BenefitsChecklist() {
         <RevealOnScroll>
           <div className="mt-6 text-center">
             <a
-              href="#oferta"
+              href="https://wa.me/573214487903?text=Hola%2C%20quiero%20todos%20los%20beneficios%20de%20ColiPlus%20para%20mi%20digesti%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               ¡Quiero todos estos beneficios! →
@@ -796,7 +878,9 @@ function WhyEffectiveSection() {
         <RevealOnScroll>
           <div className="mt-6 text-center">
             <a
-              href="#oferta"
+              href="https://wa.me/573214487903?text=Hola%2C%20quiero%20experimentar%20la%20diferencia%20con%20ColiPlus"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               Experimenta la diferencia →
@@ -864,7 +948,9 @@ function BestOptionSection() {
           </div>
           <div className="mt-4 text-center">
             <a
-              href="#oferta"
+              href="https://wa.me/573214487903?text=Hola%2C%20quiero%20elegir%20la%20mejor%20opci%C3%B3n%20de%20ColiPlus%20para%20m%C3%AD"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               Elige la mejor opción →
@@ -1024,13 +1110,13 @@ function GiftSection() {
           </div>
         </RevealOnScroll>
 
-        {/* Gift product photo */}
+        {/* Gift product photo on yellow background */}
         <RevealOnScroll>
-          <div className="bg-white rounded-2xl border-2 border-amber-300 overflow-hidden shadow-lg shadow-amber-200/50 mb-6">
+          <div className="bg-gradient-to-br from-amber-400 to-amber-300 rounded-2xl overflow-hidden shadow-lg shadow-amber-200/50 mb-6 p-6">
             <img
               src="/images/locion-termoactiva.jpg"
               alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
-              className="w-full object-contain max-h-80"
+              className="w-full object-contain max-h-72 mx-auto"
             />
           </div>
         </RevealOnScroll>
@@ -1059,19 +1145,12 @@ function GiftSection() {
           </div>
         </RevealOnScroll>
 
-        {/* Loción pricing images */}
-        <RevealOnScroll>
-          <div className="space-y-3">
-            <img src="/images/locion-1unidad.png" alt="Loción Termoactiva 1 Unidad" className="w-full object-contain rounded-xl" />
-            <img src="/images/locion-2unidades.png" alt="Loción Termoactiva 2 Unidades" className="w-full object-contain rounded-xl" />
-            <img src="/images/locion-3unidades.png" alt="Loción Termoactiva 3 Unidades" className="w-full object-contain rounded-xl" />
-          </div>
-        </RevealOnScroll>
-
         <RevealOnScroll>
           <div className="mt-6 text-center">
             <a
-              href="#oferta"
+              href="https://wa.me/573214487903?text=Hola%20quiero%20mi%20obsequio%20GRATIS%20de%20Loci%C3%B3n%20Termoactiva%20con%20mi%20pedido%20de%20ColiPlus"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-amber-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-200 transition-all duration-200 pulse-cta"
             >
               🎁 ¡QUIERO MI OBSEQUIO GRATIS!
@@ -1098,7 +1177,9 @@ function FinalCTA() {
           <p className="text-emerald-100 mb-2">Más de 8,700 personas ya recuperaron su salud intestinal con ColiPlus</p>
           <p className="text-amber-300 font-bold text-sm mb-6">🎁 + Loción Termoactiva GRATIS con tu pedido</p>
           <a
-            href="#oferta"
+            href="https://wa.me/573214487903?text=Hola%2C%20quiero%20ordenar%20ColiPlus%20AHORA%20con%20la%20promo%20del%20obsequio%20GRATIS"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-xl py-5 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
           >
             ¡ORDENAR COLIPLUS AHORA! 🌿
@@ -1143,10 +1224,12 @@ function StickyCTA() {
               <p className="text-[10px] text-gray-500">Pago contra entrega · <span className="text-amber-600 font-bold">5% OFF anticipado</span></p>
             </div>
             <a
-              href="#oferta"
-              className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-extrabold text-sm py-3 px-5 rounded-xl shadow-md shadow-emerald-200 flex-shrink-0"
+              href="https://wa.me/573214487903?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20ColiPlus%20y%20la%20promoci%C3%B3n%20del%20obsequio%20GRATIS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-extrabold text-sm py-3 px-5 rounded-xl shadow-md shadow-emerald-200 flex-shrink-0 transition-all"
             >
-              ORDENAR YA 🌿
+              MÁS INFO 📱
             </a>
           </div>
         </motion.div>
