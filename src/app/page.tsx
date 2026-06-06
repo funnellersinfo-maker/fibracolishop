@@ -127,6 +127,51 @@ function GiftReminder() {
   )
 }
 
+/* ─── TESTIMONIAL PHOTOS STRIP ─── */
+
+const TESTIMONIAL_PHOTOS = [
+  { src: '/images/testimonial-1.jpg', alt: 'Resultado real de clienta ColiPlus' },
+  { src: '/images/testimonial-2.jpg', alt: 'Testimonio verificado de ColiPlus' },
+  { src: '/images/testimonial-3.jpg', alt: 'Cliente satisfecha con ColiPlus' },
+  { src: '/images/testimonial-4.jpg', alt: 'Opinión real ColiPlus Colombia' },
+  { src: '/images/testimonial-5.jpg', alt: 'WhatsApp testimonio ColiPlus' },
+  { src: '/images/testimonial-6.jpg', alt: 'Reseña ColiPlus antes y después' },
+  { src: '/images/testimonial-7.jpg', alt: 'Cliente feliz con resultados ColiPlus' },
+]
+
+function TestimonialPhotos({ indices }: { indices: number[] }) {
+  return (
+    <div className="bg-gradient-to-b from-emerald-50 to-white py-6 px-4">
+      <div className="max-w-lg mx-auto">
+        <div className="flex items-center justify-center gap-1.5 mb-3">
+          <span className="text-emerald-700 font-extrabold text-xs uppercase tracking-wider">Resultados reales</span>
+          <span className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">100% VERIFICADO</span>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {indices.map((idx, i) => (
+            <RevealOnScroll key={i} delay={i * 0.08}>
+              <div className="relative rounded-xl overflow-hidden shadow-md border-2 border-white aspect-[4/3]">
+                <img
+                  src={TESTIMONIAL_PHOTOS[idx % TESTIMONIAL_PHOTOS.length].src}
+                  alt={TESTIMONIAL_PHOTOS[idx % TESTIMONIAL_PHOTOS.length].alt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-1.5">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, s) => (
+                      <Star key={s} className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ─── PAYMENT STRIP ─── */
 
 function PaymentStrip() {
@@ -164,6 +209,14 @@ function HeroSection() {
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
   const minSwipeDistance = 50
+
+  // Auto-rotate every 8 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % HERO_IMAGES.length)
+    }, 8000)
+    return () => clearInterval(timer)
+  }, [])
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX
@@ -1315,21 +1368,26 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col bg-white">
       <HeroSection />
       <PricingSection />
+      <TestimonialPhotos indices={[0, 1, 2]} />
       <GiftReminder />
       <TestimonialCarousel />
       <WhyChooseSection />
       <GiftReminder />
       <IngredientsSection />
       <HowToConsumeSection />
+      <TestimonialPhotos indices={[3, 4, 5]} />
       <PricingSection />
       <DidYouKnowSection />
       <GiftReminder />
       <BenefitsChecklist />
+      <TestimonialPhotos indices={[6, 0, 1]} />
       <InvimaSection />
       <WhyEffectiveSection />
       <BestOptionSection />
+      <TestimonialPhotos indices={[2, 3, 4]} />
       <MoreTestimonialsSection />
       <FAQSection />
+      <TestimonialPhotos indices={[5, 6, 0]} />
       <PricingSection />
       <GiftSection />
       <FinalCTA />
