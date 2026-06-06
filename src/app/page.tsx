@@ -320,6 +320,33 @@ function TestimonialPhotos({ indices }: { indices: number[] }) {
   )
 }
 
+/* ─── SOCIAL PROOF IMAGE BLOCK ─── */
+
+function SocialProofBlock({ src, alt, label }: { src: string; alt: string; label: string }) {
+  return (
+    <div className="bg-white py-5 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-2">
+            <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full">
+              <BadgeCheck className="w-3 h-3" />
+              {label}
+            </span>
+          </div>
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <img
+              src={src}
+              alt={alt}
+              className="w-full h-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        </RevealOnScroll>
+      </div>
+    </div>
+  )
+}
+
 /* ─── PAYMENT STRIP ─── */
 
 function PaymentStrip() {
@@ -1520,11 +1547,21 @@ export default function HomePage() {
       <TestimonialPhotos indices={[0, 1, 2]} />
       <GiftReminder />
       <TestimonialCarousel />
+      <SocialProofBlock
+        src="/images/social-proof-whatsapp.png"
+        alt="Conversaciones reales de clientes de ColiPlus por WhatsApp"
+        label="COMPRAS REALES VERIFICADAS POR WHATSAPP"
+      />
       <WhyChooseSection />
       <GiftReminder />
       <IngredientsSection />
       <HowToConsumeSection />
       <TestimonialPhotos indices={[3, 4, 5]} />
+      <SocialProofBlock
+        src="/images/social-proof-testimonials.png"
+        alt="Testimonios verificados de clientes ColiPlus con resultados reales"
+        label="TESTIMONIOS VERIFICADOS · 5 ESTRELLAS ⭐⭐⭐⭐⭐"
+      />
       <PricingSection />
       <DidYouKnowSection />
       <GiftReminder />
@@ -1535,6 +1572,11 @@ export default function HomePage() {
       <BestOptionSection />
       <TestimonialPhotos indices={[2, 3, 4]} />
       <MoreTestimonialsSection />
+      <SocialProofBlock
+        src="/images/social-proof-reviews.png"
+        alt="Reseñas verificadas de compradores reales de ColiPlus"
+        label="RESEÑAS DE COMPRADORES VERIFICADOS"
+      />
       <FAQSection />
       <TestimonialPhotos indices={[5, 6, 0]} />
       <PricingSection />
