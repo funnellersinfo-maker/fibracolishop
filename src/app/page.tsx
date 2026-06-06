@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import {
   Star, Shield, Truck, Clock, CheckCircle2, ChevronDown, ChevronUp,
@@ -10,6 +10,7 @@ import {
   Beaker, FlaskConical, Droplet, Sun, Apple, Flower2, LeafyGreen, Grape,
   BadgeCheck, CircleCheck, HandMetal, Scale, Eye, FlameKindling, Pill
 } from 'lucide-react'
+import { trackLead, trackPageViewAndViewContent } from '@/lib/meta-tracking'
 
 /* ─── DATA ──────────────────────────────────────────────────────── */
 
@@ -94,6 +95,85 @@ const DISEASE_FACTS = [
   'Los problemas digestivos reducen la calidad de vida en un 40%',
   'Un colon limpio mejora la absorción de nutrientes hasta en un 60%',
 ]
+
+/* ═══════════════════════════════════════════════════════════════════
+   META TRACKING — Componentes de seguimiento
+   
+   ─── MetaTracker ───
+   Dispara PageView + ViewContent cuando la página carga.
+   Se coloca una sola vez en el HomePage.
+   
+   ─── TrackedLink ───
+   Reemplaza <a> en TODOS los CTAs. Dispara Lead ANTES de redirigir.
+   Soporta: WhatsApp, comprar, oferta, sticky, gift.
+   
+   ─── CÓMO AGREGAR UN NUEVO CTA ───
+   Usa <TrackedLink> en lugar de <a> para cualquier enlace CTA:
+   <TrackedLink href="..." ctaLabel="Nombre del botón" ctaType="whatsapp">
+     Texto del botón
+   </TrackedLink>
+   
+   ctaType: 'whatsapp' | 'buy' | 'offer' | 'sticky' | 'gift'
+   ═══════════════════════════════════════════════════════════════════ */
+
+// ─── MetaTracker: dispara PageView + ViewContent al cargar ───
+function MetaTracker() {
+  useEffect(() => {
+    // Pequeño delay para asegurar que el Pixel esté listo
+    const timer = setTimeout(() => {
+      trackPageViewAndViewContent()
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [])
+  return null
+}
+
+// ─── TrackedLink: <a> que dispara Lead ANTES de redirigir ───
+function TrackedLink({
+  href,
+  ctaLabel,
+  ctaType = 'whatsapp',
+  children,
+  className,
+  target,
+  rel,
+}: {
+  href: string
+  ctaLabel: string
+  ctaType?: 'whatsapp' | 'buy' | 'offer' | 'sticky' | 'gift'
+  children: React.ReactNode
+  className?: string
+  target?: string
+  rel?: string
+}) {
+  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    // 1. Disparar Lead event ANTES de la redirección
+    trackLead(ctaLabel, ctaType)
+
+    // 2. Para WhatsApp links (target=_blank), el evento se dispara
+    //    antes de abrir la nueva pestaña — no hay problema.
+    // 3. Para navegación interna, damos 150ms al Beacon API
+    //    antes de que el navegador navegue.
+    if (!target || target !== '_blank') {
+      e.preventDefault()
+      setTimeout(() => {
+        window.location.href = href
+      }, 150)
+    }
+  }, [href, ctaLabel, ctaType, target])
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      className={className}
+      target={target}
+      rel={rel}
+    >
+      {children}
+    </a>
+  )
+}
 
 /* ─── HELPER: Scroll reveal wrapper ─── */
 
@@ -218,14 +298,16 @@ function TopBar() {
           </div>
 
           {/* Mini CTA */}
-          <a
+          <TrackedLink
             href="https://wa.me/573214487903?text=Hola%2C%20quiero%20aprovechar%20la%20oferta%20de%20ColiPlus%20antes%20que%20termin%C3%A9"
             target="_blank"
             rel="noopener noreferrer"
+            ctaLabel="TopBar Oferta"
+            ctaType="offer"
             className="bg-amber-400 hover:bg-amber-500 text-emerald-900 text-[10px] font-extrabold px-2.5 py-1 rounded-lg transition-colors flex-shrink-0"
           >
             🛒 OFERTA
-          </a>
+          </TrackedLink>
         </div>
       </div>
 
@@ -505,14 +587,16 @@ function HeroSection() {
         </div>
 
         {/* CTA */}
-        <a
+        <TrackedLink
           href="https://wa.me/573214487903?text=Hola%2C%20quiero%20ordenar%20ColiPlus%20ahora%20mismo%20%F0%9F%8C%BF"
           target="_blank"
           rel="noopener noreferrer"
+          ctaLabel="Hero Quiero Mi ColiPlus"
+          ctaType="whatsapp"
           className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
         >
           ¡QUIERO MI COLIPLUS AHORA! 🌿
-        </a>
+        </TrackedLink>
         <PaymentStrip />
         <p className="text-center text-xs text-emerald-200 mt-2">
           <span className="text-amber-300 font-semibold">🎁 Loción GRATIS</span> con tu pedido
@@ -955,10 +1039,12 @@ function PricingSection() {
                   <div className="mt-4 space-y-2.5">
 
                     {/* BUTTON 1: PAGO ANTICIPADO — highlighted, dopaminergic */}
-                    <a
+                    <TrackedLink
                       href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waAnticipado)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      ctaLabel={`Precio ${plan.label} Pago Anticipado`}
+                      ctaType="buy"
                       className="block w-full text-center relative overflow-hidden rounded-2xl shadow-lg transition-all duration-200 pulse-cta group"
                     >
                       {/* Auto-animated shimmer effect */}
@@ -974,13 +1060,15 @@ function PricingSection() {
                         <p className="text-amber-900 font-extrabold text-xl mt-1">{plan.priceEarlyDisplay}</p>
                         <p className="text-amber-800/70 text-[10px] font-semibold">{plan.perUnitEarly}</p>
                       </div>
-                    </a>
+                    </TrackedLink>
 
                     {/* BUTTON 2: PAGO CONTRA ENTREGA */}
-                    <a
+                    <TrackedLink
                       href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waContra)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      ctaLabel={`Precio ${plan.label} Contra Entrega`}
+                      ctaType="buy"
                       className="block w-full text-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-extrabold text-base py-3.5 px-6 rounded-2xl shadow-md transition-all duration-200"
                     >
                       <div className="flex items-center justify-center gap-2">
@@ -988,7 +1076,7 @@ function PricingSection() {
                         <span>PAGO CONTRA ENTREGA</span>
                       </div>
                       <p className="text-emerald-100 text-xs font-semibold mt-0.5">Pagas solo cuando lo recibes</p>
-                    </a>
+                    </TrackedLink>
 
                   </div>
                 </div>
@@ -1040,14 +1128,16 @@ function DidYouKnowSection() {
           <div className="mt-6 bg-rose-600 text-white rounded-2xl p-5 text-center">
             <p className="font-bold text-base mb-2">¡No esperes a que sea demasiado tarde!</p>
             <p className="text-rose-100 text-sm mb-4">Tu cuerpo necesita fibra prebiótica para mantener el colon limpio y funcionando correctamente.</p>
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%2C%20quiero%20limpiar%20mi%20colon%20con%20ColiPlus%20YA"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Limpiar Colon YA"
+              ctaType="whatsapp"
               className="inline-block bg-white text-rose-600 font-extrabold text-base py-3 px-8 rounded-2xl shadow-lg transition-all hover:bg-rose-50"
             >
               Quiero limpiar mi colon YA →
-            </a>
+            </TrackedLink>
             <PaymentStrip />
           </div>
         </RevealOnScroll>
@@ -1099,14 +1189,16 @@ function BenefitsChecklist() {
 
         <RevealOnScroll>
           <div className="mt-6 text-center">
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%2C%20quiero%20todos%20los%20beneficios%20de%20ColiPlus%20para%20mi%20digesti%C3%B3n"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Quiero Todos Beneficios"
+              ctaType="whatsapp"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               ¡Quiero todos estos beneficios! →
-            </a>
+            </TrackedLink>
             <PaymentStrip />
           </div>
         </RevealOnScroll>
@@ -1183,14 +1275,16 @@ function WhyEffectiveSection() {
 
         <RevealOnScroll>
           <div className="mt-6 text-center">
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%2C%20quiero%20experimentar%20la%20diferencia%20con%20ColiPlus"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Experimenta Diferencia"
+              ctaType="whatsapp"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               Experimenta la diferencia →
-            </a>
+            </TrackedLink>
             <PaymentStrip />
           </div>
         </RevealOnScroll>
@@ -1253,14 +1347,16 @@ function BestOptionSection() {
             </p>
           </div>
           <div className="mt-4 text-center">
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%2C%20quiero%20elegir%20la%20mejor%20opci%C3%B3n%20de%20ColiPlus%20para%20m%C3%AD"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Elige Mejor Opcion"
+              ctaType="whatsapp"
               className="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-emerald-200"
             >
               Elige la mejor opción →
-            </a>
+            </TrackedLink>
             <PaymentStrip />
           </div>
         </RevealOnScroll>
@@ -1453,14 +1549,16 @@ function GiftSection() {
 
         <RevealOnScroll>
           <div className="mt-6 text-center">
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%20quiero%20mi%20obsequio%20GRATIS%20de%20Loci%C3%B3n%20Termoactiva%20con%20mi%20pedido%20de%20ColiPlus"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Obsequio Gratis"
+              ctaType="gift"
               className="block w-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-amber-900 text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg shadow-amber-200 transition-all duration-200 pulse-cta"
             >
               🎁 ¡QUIERO MI OBSEQUIO GRATIS!
-            </a>
+            </TrackedLink>
             <PaymentStrip />
           </div>
         </RevealOnScroll>
@@ -1482,14 +1580,16 @@ function FinalCTA() {
           </h2>
           <p className="text-emerald-100 mb-2">Más de 8,700 personas ya recuperaron su salud intestinal con ColiPlus</p>
           <p className="text-amber-300 font-bold text-sm mb-6">🎁 + Loción Termoactiva GRATIS con tu pedido</p>
-          <a
+          <TrackedLink
             href="https://wa.me/573214487903?text=Hola%2C%20quiero%20ordenar%20ColiPlus%20AHORA%20con%20la%20promo%20del%20obsequio%20GRATIS"
             target="_blank"
             rel="noopener noreferrer"
+            ctaLabel="Final Ordenar ColiPlus"
+            ctaType="buy"
             className="block w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-emerald-900 text-center font-extrabold text-xl py-5 px-6 rounded-2xl shadow-lg shadow-amber-500/30 transition-all duration-200 pulse-cta"
           >
             ¡ORDENAR COLIPLUS AHORA! 🌿
-          </a>
+          </TrackedLink>
           <PaymentStrip />
           <div className="mt-2 flex items-center justify-center gap-4 text-emerald-200 text-xs">
             <span className="flex items-center gap-1"><Truck className="w-3.5 h-3.5" /> Envío nacional</span>
@@ -1529,14 +1629,16 @@ function StickyCTA() {
               <p className="text-xs font-bold text-gray-900">ColiPlus + Loción GRATIS</p>
               <p className="text-[10px] text-gray-500">Pago contra entrega · <span className="text-amber-600 font-bold">5% OFF anticipado</span></p>
             </div>
-            <a
+            <TrackedLink
               href="https://wa.me/573214487903?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20ColiPlus%20y%20la%20promoci%C3%B3n%20del%20obsequio%20GRATIS"
               target="_blank"
               rel="noopener noreferrer"
+              ctaLabel="Sticky Mas Info"
+              ctaType="sticky"
               className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-extrabold text-sm py-3 px-5 rounded-xl shadow-md shadow-emerald-200 flex-shrink-0 transition-all"
             >
               MÁS INFO 📱
-            </a>
+            </TrackedLink>
           </div>
         </motion.div>
       )}
@@ -1573,6 +1675,8 @@ function Footer() {
 export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
+      {/* Meta Tracker — dispara PageView + ViewContent al cargar */}
+      <MetaTracker />
       <TopBar />
       <HeroSection />
       <PricingSection />
