@@ -163,10 +163,8 @@ function TopBar() {
   const seconds = timeLeft % 60
 
   // ─── Live viewers ───
-  const [viewers, setViewers] = useState(0)
+  const [viewers, setViewers] = useState(() => Math.floor(Math.random() * 24) + 24)
   useEffect(() => {
-    // Initial random between 24-47
-    setViewers(Math.floor(Math.random() * 24) + 24)
     const timer = setInterval(() => {
       setViewers((prev) => {
         const delta = Math.floor(Math.random() * 5) - 2 // -2 to +2
@@ -420,9 +418,9 @@ function HeroSection() {
         <div className="absolute bottom-20 right-5 w-32 h-32 rounded-full bg-amber-400 blur-3xl" />
       </div>
 
-      <div className="relative max-w-lg mx-auto px-4 pt-14 pb-8">
-        {/* Users badge */}
-        <div className="flex justify-center mb-4">
+      <div className="relative max-w-lg mx-auto px-4 pt-20 pb-8">
+        {/* Users badge - positioned lower to avoid top bar overlap */}
+        <div className="flex justify-center mb-4 mt-2">
           <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full">
             <Users className="w-3.5 h-3.5 text-amber-300" />
             +8,700 Usuarios Confían en ColiPlus
@@ -692,6 +690,73 @@ function IngredientsSection() {
             <p className="text-emerald-700 text-sm font-medium">
               🌿 Sin azúcar · Sin edulcorantes · Sin conservantes · Sin lactosa
             </p>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  )
+}
+
+/* ─── SECTION: INFORMACIÓN NUTRICIONAL ─── */
+
+function NutritionalInfoSection() {
+  return (
+    <section className="bg-gradient-to-b from-white to-emerald-50 py-10 px-4">
+      <div className="max-w-lg mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-6">
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-wider">Transparencia total</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
+              INFORMACIÓN <span className="text-emerald-700">NUTRICIONAL</span>
+            </h2>
+            <p className="text-gray-600 mt-2 text-sm">Conoce exactamente lo que le das a tu cuerpo. Sin secretos, sin ingredientes ocultos.</p>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="bg-white rounded-2xl shadow-xl border border-emerald-100 overflow-hidden">
+            {/* Header badge */}
+            <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-5 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Pill className="w-5 h-5 text-white" />
+                <span className="text-white font-bold text-sm">COLI Plus</span>
+              </div>
+              <span className="bg-white/20 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">REGISTRO INVIMA NSA-0012423-2022</span>
+            </div>
+            {/* Nutritional table image */}
+            <div className="p-3">
+              <img
+                src="/images/tabla-nutricional.png"
+                alt="Tabla de Información Nutricional ColiPlus - Registro INVIMA NSA-0012423-2022"
+                className="w-full h-auto rounded-xl"
+                loading="lazy"
+              />
+            </div>
+            {/* Key highlights below the image */}
+            <div className="px-5 pb-4 grid grid-cols-3 gap-2">
+              <div className="bg-emerald-50 rounded-xl p-3 text-center">
+                <p className="text-emerald-700 font-extrabold text-lg">0g</p>
+                <p className="text-emerald-600 text-[10px] font-medium">Azúcar</p>
+              </div>
+              <div className="bg-emerald-50 rounded-xl p-3 text-center">
+                <p className="text-emerald-700 font-extrabold text-lg">3g</p>
+                <p className="text-emerald-600 text-[10px] font-medium">Fibra/porción</p>
+              </div>
+              <div className="bg-emerald-50 rounded-xl p-3 text-center">
+                <p className="text-emerald-700 font-extrabold text-lg">34</p>
+                <p className="text-emerald-600 text-[10px] font-medium">Calorías</p>
+              </div>
+            </div>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="mt-4 bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center">
+            <p className="text-amber-800 text-sm font-bold flex items-center justify-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-amber-600" />
+              Producto registrado y verificado ante INVIMA
+            </p>
+            <p className="text-amber-600 text-xs mt-1">Sin azúcar · Sin edulcorantes · Sin conservantes</p>
           </div>
         </RevealOnScroll>
       </div>
@@ -1555,6 +1620,7 @@ export default function HomePage() {
       <WhyChooseSection />
       <GiftReminder />
       <IngredientsSection />
+      <NutritionalInfoSection />
       <HowToConsumeSection />
       <TestimonialPhotos indices={[3, 4, 5]} />
       <SocialProofBlock
