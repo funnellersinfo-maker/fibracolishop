@@ -289,26 +289,19 @@ function TestimonialPhotos({ indices }: { indices: number[] }) {
   return (
     <div className="bg-gradient-to-b from-emerald-50 to-white py-6 px-4">
       <div className="max-w-lg mx-auto">
-        <div className="flex items-center justify-center gap-1.5 mb-3">
+        <div className="flex items-center justify-center gap-1.5 mb-4">
           <span className="text-emerald-700 font-extrabold text-xs uppercase tracking-wider">Resultados reales</span>
           <span className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">100% VERIFICADO</span>
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="space-y-3">
           {indices.map((idx, i) => (
-            <RevealOnScroll key={i} delay={i * 0.08}>
-              <div className="relative rounded-xl overflow-hidden shadow-md border-2 border-white aspect-[4/3]">
+            <RevealOnScroll key={i} delay={i * 0.1}>
+              <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-white">
                 <img
                   src={TESTIMONIAL_PHOTOS[idx % TESTIMONIAL_PHOTOS.length].src}
                   alt={TESTIMONIAL_PHOTOS[idx % TESTIMONIAL_PHOTOS.length].alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain"
                 />
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-1.5">
-                  <div className="flex items-center gap-0.5">
-                    {[...Array(5)].map((_, s) => (
-                      <Star key={s} className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                </div>
               </div>
             </RevealOnScroll>
           ))}
@@ -322,16 +315,16 @@ function TestimonialPhotos({ indices }: { indices: number[] }) {
 
 function SocialProofBlock({ src, alt, label }: { src: string; alt: string; label: string }) {
   return (
-    <div className="bg-white py-5 px-4">
+    <div className="bg-white py-6 px-4">
       <div className="max-w-lg mx-auto">
         <RevealOnScroll>
-          <div className="text-center mb-2">
-            <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-full">
-              <BadgeCheck className="w-3 h-3" />
+          <div className="text-center mb-3">
+            <span className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full">
+              <BadgeCheck className="w-4 h-4" />
               {label}
             </span>
           </div>
-          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
             <img
               src={src}
               alt={alt}
@@ -714,39 +707,13 @@ function NutritionalInfoSection() {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="bg-white rounded-2xl shadow-xl border border-emerald-100 overflow-hidden">
-            {/* Header badge */}
-            <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-5 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Pill className="w-5 h-5 text-white" />
-                <span className="text-white font-bold text-sm">COLI Plus</span>
-              </div>
-              <span className="bg-white/20 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">REGISTRO INVIMA NSA-0012423-2022</span>
-            </div>
-            {/* Nutritional table image */}
-            <div className="p-3">
-              <img
-                src="/images/tabla-nutricional.png"
-                alt="Tabla de Información Nutricional ColiPlus - Registro INVIMA NSA-0012423-2022"
-                className="w-full h-auto rounded-xl"
-                loading="lazy"
-              />
-            </div>
-            {/* Key highlights below the image */}
-            <div className="px-5 pb-4 grid grid-cols-3 gap-2">
-              <div className="bg-emerald-50 rounded-xl p-3 text-center">
-                <p className="text-emerald-700 font-extrabold text-lg">0g</p>
-                <p className="text-emerald-600 text-[10px] font-medium">Azúcar</p>
-              </div>
-              <div className="bg-emerald-50 rounded-xl p-3 text-center">
-                <p className="text-emerald-700 font-extrabold text-lg">3g</p>
-                <p className="text-emerald-600 text-[10px] font-medium">Fibra/porción</p>
-              </div>
-              <div className="bg-emerald-50 rounded-xl p-3 text-center">
-                <p className="text-emerald-700 font-extrabold text-lg">34</p>
-                <p className="text-emerald-600 text-[10px] font-medium">Calorías</p>
-              </div>
-            </div>
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <img
+              src="/images/tabla-nutricional.png"
+              alt="Tabla de Información Nutricional ColiPlus - Registro INVIMA NSA-0012423-2022"
+              className="w-full h-auto object-contain"
+              loading="lazy"
+            />
           </div>
         </RevealOnScroll>
 
@@ -754,7 +721,7 @@ function NutritionalInfoSection() {
           <div className="mt-4 bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center">
             <p className="text-amber-800 text-sm font-bold flex items-center justify-center gap-2">
               <ShieldCheck className="w-4 h-4 text-amber-600" />
-              Producto registrado y verificado ante INVIMA
+              Producto registrado y verificado ante INVIMA · NSA-0012423-2022
             </p>
             <p className="text-amber-600 text-xs mt-1">Sin azúcar · Sin edulcorantes · Sin conservantes</p>
           </div>
@@ -1167,7 +1134,7 @@ function InvimaSection() {
               </p>
             </div>
             <div className="mt-4 flex items-center justify-center gap-4">
-              <img src="/images/sellos-adara.png" alt="Certificaciones y sellos" className="h-12 object-contain opacity-90" />
+              <img src="/images/sellos-adara.png" alt="Certificaciones y sellos" className="max-h-24 object-contain opacity-90" />
             </div>
             <p className="text-emerald-200 text-xs mt-3">Compra con confianza. Producto 100% original y certificado.</p>
           </div>
@@ -1455,7 +1422,7 @@ function GiftSection() {
             <img
               src="/images/locion-termoactiva.jpg"
               alt="Loción Termoactiva Allpa Natural - Obsequio GRATIS con tu pedido"
-              className="w-full object-contain max-h-72 mx-auto"
+              className="w-full h-auto object-contain mx-auto"
             />
           </div>
         </RevealOnScroll>
@@ -1642,6 +1609,11 @@ export default function HomePage() {
         src="/images/social-proof-reviews.png"
         alt="Reseñas verificadas de compradores reales de ColiPlus"
         label="RESEÑAS DE COMPRADORES VERIFICADOS"
+      />
+      <SocialProofBlock
+        src="/images/social-proof-resultados.png"
+        alt="Resultados reales verificados de clientes ColiPlus"
+        label="RESULTADOS REALES · 100% VERIFICADO"
       />
       <FAQSection />
       <TestimonialPhotos indices={[5, 6, 0]} />
