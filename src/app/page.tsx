@@ -572,11 +572,14 @@ const PRICING_PLANS = [
     label: '1 Unidad',
     price: 75900,
     priceDisplay: '$75.900',
+    priceEarly: 72105,
+    priceEarlyDisplay: '$72.105',
     perUnit: '$75.900 c/u',
+    perUnitEarly: '$72.105 c/u',
     badge: null,
     border: 'border-gray-200 hover:border-emerald-300',
-    btn: 'bg-emerald-600 hover:bg-emerald-700 text-white',
-    waText: 'Hola, quiero ordenar 1 unidad de ColiPlus por $75.900. Pago contra entrega.',
+    waContra: 'Hola, quiero ordenar 1 unidad de ColiPlus por $75.900. Modalidad: Pago contra entrega.',
+    waAnticipado: 'Hola, quiero ordenar 1 unidad de ColiPlus por $72.105 con 5% OFF. Modalidad: Pago anticipado con prioridad en despacho.',
   },
   {
     id: 2,
@@ -584,11 +587,14 @@ const PRICING_PLANS = [
     label: '2 Unidades',
     price: 113850,
     priceDisplay: '$113.850',
+    priceEarly: 108158,
+    priceEarlyDisplay: '$108.158',
     perUnit: '$56.925 c/u',
+    perUnitEarly: '$54.079 c/u',
     badge: '🔥 MÁS POPULAR',
     border: 'border-amber-300 hover:border-amber-400',
-    btn: 'bg-amber-500 hover:bg-amber-600 text-amber-900',
-    waText: 'Hola, quiero ordenar 2 unidades de ColiPlus por $113.850. Pago contra entrega.',
+    waContra: 'Hola, quiero ordenar 2 unidades de ColiPlus por $113.850. Modalidad: Pago contra entrega.',
+    waAnticipado: 'Hola, quiero ordenar 2 unidades de ColiPlus por $108.158 con 5% OFF. Modalidad: Pago anticipado con prioridad en despacho.',
   },
   {
     id: 3,
@@ -596,11 +602,14 @@ const PRICING_PLANS = [
     label: 'Paga 2 Lleva 3',
     price: 151800,
     priceDisplay: '$151.800',
+    priceEarly: 144210,
+    priceEarlyDisplay: '$144.210',
     perUnit: '$50.600 c/u',
+    perUnitEarly: '$48.070 c/u',
     badge: '🏆 MÁXIMO AHORRO',
     border: 'border-emerald-400 hover:border-emerald-500',
-    btn: 'bg-emerald-600 hover:bg-emerald-700 text-white',
-    waText: 'Hola, quiero la promo Paga 2 Lleva 3 de ColiPlus por $151.800. Pago contra entrega.',
+    waContra: 'Hola, quiero la promo Paga 2 Lleva 3 de ColiPlus por $151.800. Modalidad: Pago contra entrega.',
+    waAnticipado: 'Hola, quiero la promo Paga 2 Lleva 3 de ColiPlus por $144.210 con 5% OFF. Modalidad: Pago anticipado con prioridad en despacho.',
   },
   {
     id: 4,
@@ -608,11 +617,14 @@ const PRICING_PLANS = [
     label: 'Paquete Familiar',
     price: 227700,
     priceDisplay: '$227.700',
+    priceEarly: 216315,
+    priceEarlyDisplay: '$216.315',
     perUnit: '$45.540 c/u',
+    perUnitEarly: '$43.263 c/u',
     badge: '👨‍👩‍👧‍👦 PAGA 3 LLEVA 5',
     border: 'border-rose-400 hover:border-rose-500',
-    btn: 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white',
-    waText: 'Hola, quiero el Paquete Familiar Paga 3 Lleva 5 de ColiPlus por $227.700. Pago contra entrega.',
+    waContra: 'Hola, quiero el Paquete Familiar Paga 3 Lleva 5 de ColiPlus por $227.700. Modalidad: Pago contra entrega.',
+    waAnticipado: 'Hola, quiero el Paquete Familiar Paga 3 Lleva 5 de ColiPlus por $216.315 con 5% OFF. Modalidad: Pago anticipado con prioridad en despacho.',
   },
 ]
 
@@ -626,7 +638,7 @@ function PricingSection() {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">
               ELIGE TU <span className="text-emerald-700">PLAN</span>
             </h2>
-            <p className="text-gray-600 mt-2 text-sm">Pago contra entrega · Solo pagas cuando recibes tu pedido</p>
+            <p className="text-gray-600 mt-2 text-sm">Elige cómo quieres pagar · Envío a toda Colombia</p>
           </div>
         </RevealOnScroll>
 
@@ -679,16 +691,46 @@ function PricingSection() {
                     <span className="text-amber-600 text-xs font-bold">🎁 + Loción Termoactiva GRATIS</span>
                   </div>
 
-                  {/* WhatsApp CTA */}
-                  <a
-                    href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waText)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block w-full text-center font-extrabold text-lg py-4 px-6 rounded-2xl shadow-lg mt-4 transition-all duration-200 pulse-cta ${plan.btn}`}
-                  >
-                    🛒 ORDENAR AHORA
-                  </a>
-                  <PaymentStrip />
+                  {/* ─── TWO CTA BUTTONS ─── */}
+                  <div className="mt-4 space-y-2.5">
+
+                    {/* BUTTON 1: PAGO ANTICIPADO — highlighted, dopaminergic */}
+                    <a
+                      href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waAnticipado)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center relative overflow-hidden rounded-2xl shadow-lg transition-all duration-200 pulse-cta group"
+                    >
+                      {/* Auto-animated shimmer effect */}
+                      <div className="absolute inset-0 shimmer pointer-events-none" />
+                      <div className="relative bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 py-4 px-6">
+                        <div className="flex items-center justify-center gap-2">
+                          <Zap className="w-5 h-5 text-amber-900" />
+                          <div>
+                            <p className="text-amber-900 font-extrabold text-base leading-tight">PAGO ANTICIPADO</p>
+                            <p className="text-amber-800/80 text-xs font-bold">5% OFF · Prioridad despacho</p>
+                          </div>
+                        </div>
+                        <p className="text-amber-900 font-extrabold text-xl mt-1">{plan.priceEarlyDisplay}</p>
+                        <p className="text-amber-800/70 text-[10px] font-semibold">{plan.perUnitEarly}</p>
+                      </div>
+                    </a>
+
+                    {/* BUTTON 2: PAGO CONTRA ENTREGA */}
+                    <a
+                      href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waContra)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-extrabold text-base py-3.5 px-6 rounded-2xl shadow-md transition-all duration-200"
+                    >
+                      <div className="flex items-center justify-center gap-2">
+                        <Truck className="w-4 h-4" />
+                        <span>PAGO CONTRA ENTREGA</span>
+                      </div>
+                      <p className="text-emerald-100 text-xs font-semibold mt-0.5">Pagas solo cuando lo recibes</p>
+                    </a>
+
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
