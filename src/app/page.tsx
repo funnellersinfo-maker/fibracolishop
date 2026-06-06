@@ -597,7 +597,7 @@ const PRICING_PLANS = [
     price: 151800,
     priceDisplay: '$151.800',
     perUnit: '$50.600 c/u',
-    badge: '🏆 MEJOR VALOR',
+    badge: '🏆 MÁXIMO AHORRO',
     border: 'border-emerald-400 hover:border-emerald-500',
     btn: 'bg-emerald-600 hover:bg-emerald-700 text-white',
     waText: 'Hola, quiero la promo Paga 2 Lleva 3 de ColiPlus por $151.800. Pago contra entrega.',
@@ -605,14 +605,14 @@ const PRICING_PLANS = [
   {
     id: 4,
     qty: 5,
-    label: 'Paga 3 Lleva 5',
+    label: 'Paquete Familiar',
     price: 227700,
     priceDisplay: '$227.700',
     perUnit: '$45.540 c/u',
-    badge: '💥 MÁXIMO AHORRO',
+    badge: '👨‍👩‍👧‍👦 PAGA 3 LLEVA 5',
     border: 'border-rose-400 hover:border-rose-500',
     btn: 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white',
-    waText: 'Hola, quiero la promo Paga 3 Lleva 5 de ColiPlus por $227.700. Pago contra entrega.',
+    waText: 'Hola, quiero el Paquete Familiar Paga 3 Lleva 5 de ColiPlus por $227.700. Pago contra entrega.',
   },
 ]
 
@@ -640,16 +640,20 @@ function PricingSection() {
                   </div>
                 )}
                 <div className="p-5">
-                  {/* Product icon */}
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    {[...Array(Math.min(plan.qty, 3))].map((_, j) => (
-                      <div key={j} className="w-10 h-14 bg-gradient-to-b from-emerald-400 to-emerald-600 rounded-lg shadow-sm flex items-center justify-center">
-                        <Leaf className="w-5 h-5 text-white" />
-                      </div>
+                  {/* Product bottles */}
+                  <div className="flex items-end justify-center gap-1.5 mb-3" style={{ minHeight: '80px' }}>
+                    {[...Array(plan.qty)].map((_, j) => (
+                      <img
+                        key={j}
+                        src="/images/coliplus-bottle.png"
+                        alt={`ColiPlus frasco ${j + 1}`}
+                        className="object-contain"
+                        style={{
+                          width: plan.qty === 1 ? '70px' : plan.qty === 2 ? '55px' : plan.qty === 3 ? '48px' : '40px',
+                          height: plan.qty === 1 ? '80px' : plan.qty === 2 ? '65px' : plan.qty === 3 ? '58px' : '50px',
+                        }}
+                      />
                     ))}
-                    {plan.qty > 3 && (
-                      <span className="text-emerald-600 font-extrabold text-xl">+{plan.qty - 3}</span>
-                    )}
                   </div>
 
                   {/* Plan name */}
