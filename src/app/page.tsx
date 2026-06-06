@@ -113,6 +113,154 @@ function RevealOnScroll({ children, className = '', delay = 0 }: { children: Rea
   )
 }
 
+/* ─── TOP BAR: COUNTDOWN + VIEWERS + PURCHASE NOTIFICATIONS ─── */
+
+const COLOMBIAN_CITIES = [
+  { city: 'Bogotá', region: 'Cundinamarca' },
+  { city: 'Medellín', region: 'Antioquia' },
+  { city: 'Cali', region: 'Valle del Cauca' },
+  { city: 'Barranquilla', region: 'Atlántico' },
+  { city: 'Cartagena', region: 'Bolívar' },
+  { city: 'Bucaramanga', region: 'Santander' },
+  { city: 'Pereira', region: 'Risaralda' },
+  { city: 'Montería', region: 'Córdoba' },
+  { city: 'Manizales', region: 'Caldas' },
+  { city: 'Ibagué', region: 'Tolima' },
+  { city: 'Villavicencio', region: 'Meta' },
+  { city: 'Pasto', region: 'Nariño' },
+  { city: 'Cúcuta', region: 'Norte de Santander' },
+  { city: 'Armenia', region: 'Quindío' },
+  { city: 'Popayán', region: 'Cauca' },
+  { city: 'Sincelejo', region: 'Sucre' },
+  { city: 'Neiva', region: 'Huila' },
+  { city: 'Santa Marta', region: 'Magdalena' },
+  { city: 'Valledupar', region: 'Cesar' },
+  { city: 'Tunja', region: 'Boyacá' },
+  { city: 'Florencia', region: 'Caquetá' },
+  { city: 'Riohacha', region: 'La Guajira' },
+  { city: 'Yopal', region: 'Casanare' },
+  { city: 'Mocoa', region: 'Putumayo' },
+  { city: 'Quibdó', region: 'Chocó' },
+]
+
+const PURCHASE_NAMES = [
+  'Carolina', 'Andrea', 'Natalia', 'María', 'Sandra', 'Luz', 'Claudia',
+  'Yolanda', 'Ana', 'Patricia', 'Lucía', 'Rosa', 'Gloria', 'Marta',
+  'Diana', 'Carmen', 'Juliana', 'Beatriz', 'Ángela', 'Paola',
+  'Viviana', 'Liliana', 'Adriana', 'Catalina', 'Jimena', 'Valentina',
+]
+
+function TopBar() {
+  // ─── 15-minute countdown ───
+  const [timeLeft, setTimeLeft] = useState(15 * 60) // 15 min in seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 15 * 60))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+  const minutes = Math.floor(timeLeft / 60)
+  const seconds = timeLeft % 60
+
+  // ─── Live viewers ───
+  const [viewers, setViewers] = useState(0)
+  useEffect(() => {
+    // Initial random between 24-47
+    setViewers(Math.floor(Math.random() * 24) + 24)
+    const timer = setInterval(() => {
+      setViewers((prev) => {
+        const delta = Math.floor(Math.random() * 5) - 2 // -2 to +2
+        return Math.max(18, Math.min(60, prev + delta))
+      })
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [])
+
+  // ─── Purchase notifications ───
+  const [purchase, setPurchase] = useState<{ name: string; city: string; time: string } | null>(null)
+  const [purchaseVisible, setPurchaseVisible] = useState(false)
+
+  useEffect(() => {
+    const showNotification = () => {
+      const name = PURCHASE_NAMES[Math.floor(Math.random() * PURCHASE_NAMES.length)]
+      const loc = COLOMBIAN_CITIES[Math.floor(Math.random() * COLOMBIAN_CITIES.length)]
+      const mins = Math.floor(Math.random() * 12) + 1
+      setPurchase({ name, city: loc.city, time: `hace ${mins} min` })
+      setPurchaseVisible(true)
+      setTimeout(() => setPurchaseVisible(false), 4000)
+    }
+    // First one after 5s, then every 10-15s
+    const initial = setTimeout(() => {
+      showNotification()
+      const loop = setInterval(showNotification, 10000 + Math.random() * 5000)
+      return () => clearInterval(loop)
+    }, 5000)
+    return () => clearTimeout(initial)
+  }, [])
+
+  return (
+    <>
+      {/* Fixed top bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-emerald-900/95 backdrop-blur-sm border-b border-emerald-700/50 shadow-lg">
+        <div className="max-w-lg mx-auto px-3 py-1.5 flex items-center justify-between gap-2">
+          {/* Countdown */}
+          <div className="flex items-center gap-1.5">
+            <Timer className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+            <span className="text-[10px] text-emerald-200 font-medium hidden sm:inline">Oferta</span>
+            <span className="text-amber-300 font-extrabold text-sm tabular-nums tracking-wide">
+              {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+            </span>
+          </div>
+
+          {/* Viewers */}
+          <div className="flex items-center gap-1.5">
+            <Eye className="w-3.5 h-3.5 text-emerald-300 flex-shrink-0" />
+            <span className="text-white font-bold text-xs tabular-nums">{viewers}</span>
+            <span className="text-emerald-200 text-[10px]">viendo</span>
+          </div>
+
+          {/* Mini CTA */}
+          <a
+            href="https://wa.me/573214487903?text=Hola%2C%20quiero%20aprovechar%20la%20oferta%20de%20ColiPlus%20antes%20que%20termin%C3%A9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-amber-400 hover:bg-amber-500 text-emerald-900 text-[10px] font-extrabold px-2.5 py-1 rounded-lg transition-colors flex-shrink-0"
+          >
+            🛒 OFERTA
+          </a>
+        </div>
+      </div>
+
+      {/* Purchase notification popup */}
+      <AnimatePresence>
+        {purchaseVisible && purchase && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, x: 0 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="fixed top-12 left-3 right-3 z-40 sm:left-auto sm:right-3 sm:w-72"
+          >
+            <div className="bg-white rounded-xl shadow-2xl border border-emerald-100 p-2.5 flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-bold text-gray-900 truncate">
+                  {purchase.name} de {purchase.city}
+                </p>
+                <p className="text-[10px] text-gray-500">
+                  Compró ColiPlus · {purchase.time}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
 /* ─── GIFT REMINDER STRIP ─── */
 
 function GiftReminder() {
@@ -245,7 +393,7 @@ function HeroSection() {
         <div className="absolute bottom-20 right-5 w-32 h-32 rounded-full bg-amber-400 blur-3xl" />
       </div>
 
-      <div className="relative max-w-lg mx-auto px-4 pt-6 pb-8">
+      <div className="relative max-w-lg mx-auto px-4 pt-14 pb-8">
         {/* Users badge */}
         <div className="flex justify-center mb-4">
           <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full">
@@ -1366,6 +1514,7 @@ function Footer() {
 export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
+      <TopBar />
       <HeroSection />
       <PricingSection />
       <TestimonialPhotos indices={[0, 1, 2]} />
