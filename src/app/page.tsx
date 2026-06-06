@@ -1268,13 +1268,13 @@ export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
       <HeroSection />
+      <PricingSection />
       <GiftReminder />
       <TestimonialCarousel />
       <WhyChooseSection />
       <GiftReminder />
       <IngredientsSection />
       <HowToConsumeSection />
-      <PricingSection />
       <DidYouKnowSection />
       <GiftReminder />
       <BenefitsChecklist />
