@@ -26,43 +26,6 @@ export const metadata: Metadata = {
   },
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   META PIXEL — Instalación profesional
-   
-   ─── PIXEL ID ───
-   ▸ Actual: 1289231602942427
-   ▸ Para cambiar: Modifica el valor en las 3 ubicaciones marcadas abajo
-   
-   ─── EVENTOS QUE DISPARA ESTE SCRIPT ───
-   ▸ PageView — Se dispara inmediatamente al cargar (baseline)
-   
-   ─── EVENTOS ADICIONALES (disparados desde meta-tracking.ts) ───
-   ▸ ViewContent — Al cargar la landing (componente MetaTracker)
-   ▸ Lead — Al hacer clic en cualquier CTA
-   
-   ─── CAPI ───
-   ▸ Los eventos también se envían server-side via /api/meta-conversions
-   ▸ Con el mismo event_id para deduplicación automática
-   
-   ─── PRUEBA ───
-   ▸ Ejecuta window.__metaTest() en la consola del navegador
-   ═══════════════════════════════════════════════════════════════════ */
-
-const META_PIXEL_ID = '1289231602942427' // ← PIXEL ID: Cambiar aquí (ubicación 1/3)
-
-const metaPixelScript = `
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '${META_PIXEL_ID}');
-fbq('track', 'PageView');
-`
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,24 +34,33 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        {/* ─── Meta Pixel Base Code ───
-            PIXEL ID ubicación 2/3 — Cambiar también aquí si modificas el Pixel */}
+        {/* Meta Pixel Code */}
         <script
           dangerouslySetInnerHTML={{
-            __html: metaPixelScript,
+            __html: `
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1289231602942427');
+fbq('track', 'PageView');
+`,
           }}
         />
-        {/* Noscript fallback for PageView — PIXEL ID ubicación 3/3 */}
         <noscript>
           <img
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+            src="https://www.facebook.com/tr?id=1289231602942427&ev=PageView&noscript=1"
             alt=""
           />
         </noscript>
-        {/* End Meta Pixel Base Code */}
+        {/* End Meta Pixel Code */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
