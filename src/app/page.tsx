@@ -955,6 +955,7 @@ function PricingSection() {
                   <div className="mt-4 space-y-2.5">
 
                     {/* BUTTON 1: PAGO ANTICIPADO — highlighted, dopaminergic */}
+                    <p className="text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Opción 1</p>
                     <a
                       href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waAnticipado)}`}
                       target="_blank"
@@ -977,6 +978,7 @@ function PricingSection() {
                     </a>
 
                     {/* BUTTON 2: PAGO CONTRA ENTREGA */}
+                    <p className="text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Opción 2</p>
                     <a
                       href={`https://wa.me/573214487903?text=${encodeURIComponent(plan.waContra)}`}
                       target="_blank"
@@ -998,7 +1000,33 @@ function PricingSection() {
         </div>
 
         <RevealOnScroll>
-          <div className="mt-6 text-center">
+          <div className="mt-6 bg-gray-50 border border-gray-200 rounded-2xl p-4">
+            <p className="text-center text-sm font-bold text-gray-800 mb-3">¿Cómo quieres pagar?</p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Zap className="w-4 h-4 text-amber-600" />
+                  <span className="text-xs font-extrabold text-amber-700">OPCIÓN 1</span>
+                </div>
+                <p className="text-[11px] text-gray-700 leading-tight">
+                  <span className="font-bold text-amber-700">5% descuento</span> pagando por adelantado + <span className="font-bold">prioridad en despacho</span> (llega más rápido)
+                </p>
+              </div>
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Truck className="w-4 h-4 text-emerald-600" />
+                  <span className="text-xs font-extrabold text-emerald-700">OPCIÓN 2</span>
+                </div>
+                <p className="text-[11px] text-gray-700 leading-tight">
+                  <span className="font-bold text-emerald-700">Pago contra entrega</span> — solo pagas cuando recibes tu pedido en la puerta de tu casa
+                </p>
+              </div>
+            </div>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <div className="mt-4 text-center">
             <p className="text-xs text-gray-500">
               <Lock className="w-3 h-3 inline mr-1" />
               Compra segura · <span className="text-amber-600 font-semibold">🎁 Loción GRATIS incluida</span>
